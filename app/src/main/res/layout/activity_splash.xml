@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_splash_gradient">
+
+    <!-- Logo Text Center -->
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Foodgo"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="bold|italic"
+        android:layout_centerInParent="true" />
+
+    <!-- Burger Image -->
+    <ImageView
+        android:id="@+id/imgBurger"
+        android:layout_width="295dp"
+        android:layout_height="288dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:src="@drawable/burger_splash"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true" />
+</RelativeLayout>
