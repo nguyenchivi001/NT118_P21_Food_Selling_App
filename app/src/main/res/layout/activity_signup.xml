@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="24dp">
+
+    <!-- Logo -->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_foodgo_logo"
+        android:layout_marginBottom="12dp" />
+
+    <!-- App Name -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Foodgo"
+        android:textColor="#FF3D00"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Restaurant"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Create Account -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:textColor="#333333"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Full Name -->
+    <EditText
+        android:id="@+id/edtFullName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Full Name"
+        android:drawableStart="@drawable/ic_user"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#AAAAAA"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Username -->
+    <EditText
+        android:id="@+id/edtUsername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Username"
+        android:drawableStart="@drawable/ic_user"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#AAAAAA"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Password -->
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Password"
+        android:drawableStart="@drawable/ic_lock"
+        android:inputType="textPassword"
+        android:background="@drawable/edit_text_background"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:textColorHint="#AAAAAA"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Create Account Button -->
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Create Account"
+        android:backgroundTint="#FF3D00"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? "
+        android:textColor="#777777"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="#FF3D00"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
