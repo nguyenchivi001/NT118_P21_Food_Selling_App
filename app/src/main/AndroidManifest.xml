@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- 🔐 Thêm quyền truy cập Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,23 +14,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Food_Selling_App"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <!-- SplashActivity là màn hình khởi động đầu tiên -->
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+    <!-- SplashActivity là màn hình khởi động đầu tiên -->
+    <activity
+        android:name=".ui.SplashActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
 
-        <!-- Các màn hình còn lại -->
-        <activity android:name=".LoginActivity" android:exported="false" />
-        <activity android:name=".SignupActivity" android:exported="false" />
-        <activity android:name=".HomeActivity" android:exported="false" />
-        <activity android:name=".MainActivity" android:exported="false" />
-    </application>
+    <!-- Các màn hình còn lại -->
+    <activity android:name=".ui.LoginActivity" android:exported="false" />
+    <activity android:name=".ui.SignupActivity" android:exported="false" />
+    <activity android:name=".ui.HomeActivity" android:exported="false" />
+    <activity android:name=".ui.MainActivity" android:exported="false" />
+</application>
 
-</manifest>
+    </manifest>

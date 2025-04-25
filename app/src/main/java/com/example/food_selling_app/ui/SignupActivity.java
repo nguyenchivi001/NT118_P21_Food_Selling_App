@@ -1,10 +1,12 @@
-package com.example.food_selling_app;
+package com.example.food_selling_app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.food_selling_app.R;
 
 public class SignupActivity extends AppCompatActivity {
     @Override
