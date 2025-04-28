@@ -3,6 +3,7 @@ package com.example.food_selling_app.api;
 import com.example.food_selling_app.dto.AuthRequest;
 import com.example.food_selling_app.dto.AuthResponse;
 import com.example.food_selling_app.dto.RefreshTokenRequest;
+import com.example.food_selling_app.dto.RegisterRequest;
 import com.example.food_selling_app.model.User;
 
 import retrofit2.Call;
@@ -19,4 +20,7 @@ public interface AuthApi {
 
     @POST("/auth/refresh")
     Call<AuthResponse> refresh(@Body RefreshTokenRequest request);
+
+    @POST("/auth/register")
+    Call<Void> register(@Body RegisterRequest request);
 }
