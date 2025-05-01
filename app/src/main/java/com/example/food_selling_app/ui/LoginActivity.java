@@ -61,7 +61,15 @@ public class LoginActivity extends AppCompatActivity {
 
                         getUserProfile(authResponse.getAccessToken());
                     } else {
-                        Toast.makeText(LoginActivity.this, "Sai tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT).show();
+                        // Kiểm tra mã lỗi và thông báo chi tiết từ server
+                        try {
+                            String errorMessage = response.errorBody().string(); // lấy thông báo lỗi từ response
+                            Log.e("LOGIN_ERROR", errorMessage); // log thông báo lỗi
+                            Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Log.e("LOGIN_FAIL", e.getMessage(), e);
+                            Toast.makeText(LoginActivity.this, "Đăng nhập không thành công. Vui lòng thử lại.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
@@ -71,14 +79,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Lỗi kết nối server", Toast.LENGTH_SHORT).show();
                 }
             });
-        });
-
-        tvRegisterNow.setOnClickListener(v -> {
-            startActivity(new Intent(this, SignupActivity.class));
-        });
-
-        tvForgotPassword.setOnClickListener(v -> {
-            Toast.makeText(this, "Reset password link sent.", Toast.LENGTH_SHORT).show();
         });
     }
 
