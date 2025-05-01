@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Phần chưa chọn (background trắng xám nhạt) -->
+    <item android:id="@android:id/background">
+        <shape>
+            <corners android:radius="16dp" />
+            <solid android:color="#EEEEEE" />
+        </shape>
+    </item>
+
+    <!-- Phần đã chọn (màu đỏ) -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <corners android:radius="16dp" />
+                <solid android:color="#EF2A39" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

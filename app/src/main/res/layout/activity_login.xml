@@ -18,11 +18,11 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
         android:text="Foodgo"
         android:textColor="#FF3D00"
-        android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,13 +55,17 @@
         android:id="@+id/edtUsername"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Username"
-        android:drawableStart="@drawable/ic_user"
+        android:layout_marginBottom="12dp"
         android:background="@drawable/edit_text_background"
-        android:padding="12dp"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="12dp"
+        android:hint="Email"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:textColor="#000000"
         android:textColorHint="#AAAAAA"
-        android:layout_marginBottom="12dp" />
+        android:inputType="textEmailAddress" />
 
     <!-- Password -->
     <EditText
@@ -69,13 +73,16 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Password"
-        android:drawableStart="@drawable/ic_lock"
-        android:inputType="textPassword"
+        android:layout_marginBottom="6dp"
         android:background="@drawable/edit_text_background"
-        android:padding="12dp"
+        android:drawableStart="@drawable/ic_lock"
+        android:drawablePadding="12dp"
+        android:gravity="center_vertical"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:textColor="#000000"
         android:textColorHint="#AAAAAA"
-        android:layout_marginBottom="6dp" />
+        android:inputType="textPassword" />
 
     <!-- Forgot password -->
     <TextView
@@ -85,7 +92,7 @@
         android:text="Forgot password?"
         android:textColor="#FF3D00"
         android:gravity="end"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:layout_marginBottom="24dp" />
 
     <!-- Login Button -->
@@ -97,6 +104,7 @@
         android:backgroundTint="#FF3D00"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
+        android:textSize="18sp"
         android:layout_marginBottom="16dp" />
 
     <!-- Register -->
@@ -113,7 +121,7 @@
         android:layout_height="wrap_content"
         android:text="Register Now"
         android:textColor="#FF3D00"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
 </LinearLayout>

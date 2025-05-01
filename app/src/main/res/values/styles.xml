@@ -1,0 +1,21 @@
+<resources>
+
+    <!-- Style cho tab được chọn -->
+    <style name="TabButtonSelected" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#EF2A39</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="cornerSize">24dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+    <!-- Style cho tab không được chọn -->
+    <style name="TabButtonUnselected" parent="Widget.Material3.Button">
+        <item name="backgroundTint">#F3F3F3</item>
+        <item name="android:textColor">#888888</item>
+        <item name="cornerSize">24dp</item>
+        <item name="strokeWidth">0dp</item>
+        <item name="rippleColor">@android:color/transparent</item>
+    </style>
+
+</resources>
