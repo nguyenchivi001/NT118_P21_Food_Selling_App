@@ -48,12 +48,13 @@ public class SignupActivity extends AppCompatActivity {
             String email = edtUsername.getText().toString().trim(); // dùng username làm email
             String password = edtPassword.getText().toString().trim();
 
-            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(SignupActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            RegisterRequest request = new RegisterRequest(name, email, password);
+            String error = request.validate();
+            if (error != null) {
+                Toast.makeText(SignupActivity.this, error, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            RegisterRequest request = new RegisterRequest(name, email, password);
             AuthApi authApi = ApiClient.getClient(null).create(AuthApi.class);
 
             authApi.register(request).enqueue(new Callback<Void>() {
