@@ -16,6 +16,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.MessageActivity"
             android:exported="false" />
         <activity
@@ -23,7 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".ui.FoodDetailActivity"
-            android:exported="false" /> <!-- SplashActivity là màn hình khởi động đầu tiên -->
+            android:exported="false" />
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">
@@ -32,7 +35,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Các màn hình còn lại -->
+        </activity>
         <activity
             android:name=".ui.LoginActivity"
             android:exported="false" />

@@ -105,6 +105,9 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.nav_message) {
                 startActivity(new Intent(HomeActivity.this, MessageActivity.class));
                 return true;
+            }else if (id == R.id.nav_cart) {
+                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+                return true;
             }
             return false;
         });
