@@ -80,6 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         });
+
+        tvRegisterNow.setOnClickListener(v -> {
+            startActivity(new Intent(this, SignupActivity.class));
+        });
+
+        tvForgotPassword.setOnClickListener(v -> {
+            Toast.makeText(this, "Reset password link sent.", Toast.LENGTH_SHORT).show();
+        });
+
     }
 
     private void getUserProfile(String accessToken) {
