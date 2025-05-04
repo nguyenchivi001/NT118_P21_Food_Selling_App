@@ -10,7 +10,8 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:padding="12dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
@@ -24,15 +25,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="My Order"
+            android:text="Đơn hàng"
             android:textStyle="bold"
             android:textColor="#000"
             android:textSize="18sp"
             android:gravity="center" />
 
         <ImageView
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@drawable/ic_user"
             android:background="@drawable/bg_avatar_circle"
             android:padding="8dp"
@@ -47,9 +48,10 @@
         android:layout_above="@+id/footer"
         android:layout_below="@id/header"
         android:clipToPadding="false"
-        android:padding="8dp" />
+        android:paddingHorizontal="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp" />
 
-    <!-- Footer -->
     <!-- Footer -->
     <LinearLayout
         android:id="@+id/footer"
@@ -57,22 +59,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:padding="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="20dp"
+        android:background="#FAFAFA">
 
         <!-- Subtotal row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+            android:layout_marginBottom="6dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Subtotal"
+                android:text="Tạm tính"
                 android:textStyle="bold"
-                android:textColor="#666" />
+                android:textColor="#666666" />
 
             <TextView
                 android:id="@+id/tvSubtotal"
@@ -80,8 +85,8 @@
                 android:layout_height="wrap_content"
                 android:text="98.000 VND"
                 android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#000" />
+                android:textSize="15sp"
+                android:textColor="#000000" />
         </LinearLayout>
 
         <!-- Delivery row -->
@@ -89,14 +94,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="4dp">
+            android:layout_marginBottom="6dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Delivery"
-                android:textColor="#666" />
+                android:text="Phí giao hàng"
+                android:textColor="#666666" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,25 +114,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Total"
-                android:textColor="#000"
-                android:textStyle="bold" />
+                android:text="Tổng tiền"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="98.000VND"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:text="98.000 VND"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textSize="20sp" />
         </LinearLayout>
 
         <!-- Checkout button -->
@@ -136,11 +142,12 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:text="Checkout"
+            android:text="Thanh toán"
             android:textColor="#FFFFFF"
             android:backgroundTint="#EF2A39"
-            android:paddingVertical="12dp" />
+            android:paddingVertical="12dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </RelativeLayout>
