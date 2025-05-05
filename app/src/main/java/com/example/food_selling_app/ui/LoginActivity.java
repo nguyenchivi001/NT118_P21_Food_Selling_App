@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         AuthResponse authResponse = response.body();
                         TokenManager.saveToken(LoginActivity.this, authResponse.getAccessToken(), authResponse.getRefreshToken());
-
+                        TokenManager.saveEmail(LoginActivity.this, email);
                         getUserProfile(authResponse.getAccessToken());
                     } else {
                         // Kiểm tra mã lỗi và thông báo chi tiết từ server
