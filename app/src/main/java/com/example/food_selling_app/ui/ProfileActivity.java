@@ -3,6 +3,7 @@ package com.example.food_selling_app.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
@@ -10,7 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.AuthApi;
+import com.example.food_selling_app.api.UserApi;
 import com.example.food_selling_app.dto.LogoutRequest;
+import com.example.food_selling_app.model.User;
 import com.example.food_selling_app.util.TokenManager;
 import com.google.android.material.button.MaterialButton;
 
@@ -27,10 +30,15 @@ public class ProfileActivity extends AppCompatActivity {
     private String userEmail;
     private String userToken;
 
+    private EditText edtName, edtEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        edtName = findViewById(R.id.edtName);
+        edtEmail = findViewById(R.id.edtEmail);
 
         // Khởi tạo nút Back
         ImageView btnBack = findViewById(R.id.btnBack);
@@ -49,6 +57,8 @@ public class ProfileActivity extends AppCompatActivity {
             redirectToLogin();
             return;
         }
+
+        fetchUserProfile();
 
         // Gắn sự kiện nhấn nút Logout
         btnLogout.setOnClickListener(v -> showLogoutConfirmationDialog());
@@ -89,6 +99,29 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Toast.makeText(ProfileActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void fetchUserProfile() {
+        UserApi userApi = ApiClient.getClient(userToken).create(UserApi.class);
+        Call<User> call = userApi.getUserProfile();
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    User user = response.body();
+                    edtName.setText(user.getName());
+                    edtEmail.setText(user.getEmail());
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Không thể tải thông tin người dùng", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(ProfileActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
