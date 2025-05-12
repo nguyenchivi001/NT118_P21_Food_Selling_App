@@ -3,6 +3,7 @@ package com.example.food_selling_app.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,11 +45,25 @@ public class LoginActivity extends AppCompatActivity {
             String email = edtUsername.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
 
+            // Kiểm tra thông tin đầu vào
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Kiểm tra định dạng email
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Định dạng email không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Kiểm tra độ dài mật khẩu
+            if (password.length() < 6) {
+                Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Nếu tất cả kiểm tra đều hợp lệ, gửi yêu cầu đăng nhập
             AuthApi authApi = ApiClient.getClient(null).create(AuthApi.class);
             AuthRequest authRequest = new AuthRequest(email, password);
 
@@ -58,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
                         AuthResponse authResponse = response.body();
                         TokenManager.saveToken(LoginActivity.this, authResponse.getAccessToken(), authResponse.getRefreshToken());
-
+                        TokenManager.saveEmail(LoginActivity.this, email);
                         getUserProfile(authResponse.getAccessToken());
                     } else {
                         // Kiểm tra mã lỗi và thông báo chi tiết từ server
@@ -86,9 +101,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         tvForgotPassword.setOnClickListener(v -> {
-            Toast.makeText(this, "Reset password link sent.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Đã gửi liên kết đặt lại mật khẩu.", Toast.LENGTH_SHORT).show();
         });
-
     }
 
     private void getUserProfile(String accessToken) {
@@ -111,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e("PROFILE_FAIL", t.getMessage(), t);
-                Toast.makeText(LoginActivity.this, "Lỗi khi lấy profile", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Lỗi khi lấy thông tin hồ sơ", Toast.LENGTH_SHORT).show();
             }
         });
     }

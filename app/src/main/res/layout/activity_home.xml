@@ -68,13 +68,6 @@
                 android:textColorHint="#999999"
                 android:textSize="14sp"/>
 
-            <ImageButton
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_filter"
-                android:background="@drawable/red_circle"
-                android:contentDescription="Lọc"
-                android:layout_marginStart="8dp" />
         </LinearLayout>
 
         <!-- Tabs -->
@@ -132,12 +125,31 @@
         </HorizontalScrollView>
 
         <!-- Danh sách món ăn -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvFoodList"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="12dp">
+
+            <!-- RecyclerView cho danh sách món ăn -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFoodList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible" />
+
+            <!-- TextView hiển thị khi không có sản phẩm -->
+            <TextView
+                android:id="@+id/tvNoProducts"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Không tìm thấy món ăn"
+                android:textSize="16sp"
+                android:textColor="#777777"
+                android:gravity="center"
+                android:visibility="gone" />
+
+        </FrameLayout>
     </LinearLayout>
 
     <!-- BottomAppBar chỉ dùng để tạo lõm -->
