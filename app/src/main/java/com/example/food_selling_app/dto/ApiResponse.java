@@ -1,7 +1,4 @@
-package com.example.food_selling_app.model;
-
-import com.google.gson.annotations.SerializedName;
-import java.util.List;
+package com.example.food_selling_app.dto;
 
 public class ApiResponse<T> {
     private boolean success;

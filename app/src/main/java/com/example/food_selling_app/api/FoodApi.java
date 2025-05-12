@@ -1,8 +1,9 @@
 package com.example.food_selling_app.api;
 
-import com.example.food_selling_app.model.ApiResponse;
+import com.example.food_selling_app.dto.ApiResponse;
+import com.example.food_selling_app.model.Category;
 import com.example.food_selling_app.model.Food;
-import com.example.food_selling_app.model.FoodResponse;
+import com.example.food_selling_app.dto.FoodResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -23,10 +24,13 @@ public interface FoodApi {
     Call<ApiResponse<Food>> getFoodById(@Path("id") int id);
 
     @GET("api/foods/search")
-    Call<ApiResponse<List<Food>>> searchFoods(
+    Call<ApiResponse<FoodResponse>> searchFoods(
             @Query("name") String name,
             @Query("categoryId") Integer categoryId,
             @Query("page") int page,
             @Query("size") int size
     );
+
+    @GET("api/categories")
+    Call<ApiResponse<List<Category>>> getAllCategories();
 }
