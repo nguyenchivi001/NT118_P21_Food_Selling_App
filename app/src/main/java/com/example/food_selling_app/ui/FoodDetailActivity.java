@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,14 +20,14 @@ import java.util.Locale;
 
 public class FoodDetailActivity extends AppCompatActivity {
 
-    ImageView imgFood, btnBack;
-    TextView tvName, tvDescription, tvQuantity;
-    Button btnPrice, btnOrderNow;
-    ImageButton btnMinus, btnPlus;
-    SeekBar seekSpicy;
-    int quantity = 1;
-    double price = 0.0;
-    final String baseImageUrl = "http://10.0.2.2:8080/api/foods/images/";
+    private ImageView imgFood, btnBack;
+    private TextView tvName, tvDescription, tvPrice, tvQuantity;
+    private ImageButton btnPlus, btnMinus;
+    private Button btnBuy, btnFavorite;
+
+    private int quantity = 1;
+    private int unitPrice = 15000; // Giá mặc định
+    private final String baseImageUrl = "http://10.0.2.2:8080/api/foods/images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,29 +39,25 @@ public class FoodDetailActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);
         tvName = findViewById(R.id.tvName);
         tvDescription = findViewById(R.id.tvDescription);
+        tvPrice = findViewById(R.id.tvPrice);
         tvQuantity = findViewById(R.id.tvQuantity);
-        btnPrice = findViewById(R.id.btnPrice);
-        btnOrderNow = findViewById(R.id.btnOrderNow);
-        btnMinus = findViewById(R.id.btnMinus);
         btnPlus = findViewById(R.id.btnPlus);
-        seekSpicy = findViewById(R.id.seekSpicy);
+        btnMinus = findViewById(R.id.btnMinus);
+        btnBuy = findViewById(R.id.btnBuy);
+        btnFavorite = findViewById(R.id.btnFavorite);
 
         // Nhận dữ liệu từ Intent
         String name = getIntent().getStringExtra("name");
         String description = getIntent().getStringExtra("description");
         String imageFilename = getIntent().getStringExtra("imageFilename");
-        String priceStr = getIntent().getStringExtra("price");
+        unitPrice = getIntent().getIntExtra("price", 15000);
 
-        if (priceStr != null) {
-            price = Double.parseDouble(priceStr);
-        }
-
-        // Gán dữ liệu vào view
+        // Gán dữ liệu
         tvName.setText(name);
         tvDescription.setText(description);
-        tvQuantity.setText(String.valueOf(quantity));
-        updateTotalPrice();
+        updateQuantityDisplay();
 
+        // Load ảnh bằng Glide
         if (imageFilename != null && !imageFilename.isEmpty()) {
             String imageUrl = baseImageUrl + imageFilename;
             Glide.with(this)
@@ -74,38 +69,39 @@ public class FoodDetailActivity extends AppCompatActivity {
             imgFood.setImageResource(R.drawable.placeholder);
         }
 
-        // Tăng số lượng
+        // Xử lý tăng/giảm số lượng
         btnPlus.setOnClickListener(v -> {
             quantity++;
-            tvQuantity.setText(String.valueOf(quantity));
-            updateTotalPrice();
+            updateQuantityDisplay();
         });
 
-        // Giảm số lượng
         btnMinus.setOnClickListener(v -> {
             if (quantity > 1) {
                 quantity--;
-                tvQuantity.setText(String.valueOf(quantity));
-                updateTotalPrice();
+                updateQuantityDisplay();
             }
         });
 
-        // Xử lý đặt hàng (có thể mở rộng)
-        btnOrderNow.setOnClickListener(v -> {
-            Toast.makeText(this,
-                    "Đã đặt " + quantity + " " + name,
-                    Toast.LENGTH_SHORT).show();
+        // Yêu thích
+        btnFavorite.setOnClickListener(v -> {
+            Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
         });
 
-        btnBack.setOnClickListener(v -> {
-            finish();
+        // Mua hàng
+        btnBuy.setOnClickListener(v -> {
+            int total = quantity * unitPrice;
+            String formattedTotal = NumberFormat.getNumberInstance(new Locale("vi", "VN")).format(total);
+            Toast.makeText(this, "Đã mua " + quantity + " món với tổng: " + formattedTotal + " VND", Toast.LENGTH_SHORT).show();
         });
+
+        // Quay lại
+        btnBack.setOnClickListener(v -> finish());
     }
 
-    private void updateTotalPrice() {
-        NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("vi", "VN"));
-        String formatted = formatter.format(price * quantity) + "đ";
-        btnPrice.setText(formatted);
+    private void updateQuantityDisplay() {
+        tvQuantity.setText(String.valueOf(quantity));
+        String formattedPrice = NumberFormat.getNumberInstance(new Locale("vi", "VN")).format(unitPrice * quantity);
+        tvPrice.setText(formattedPrice + " VND");
     }
 
     private GlideUrl getGlideUrlWithToken(String imageUrl) {
