@@ -1,5 +1,6 @@
-package com.example.food_selling_app.model;
+package com.example.food_selling_app.dto;
 
+import com.example.food_selling_app.model.Food;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 

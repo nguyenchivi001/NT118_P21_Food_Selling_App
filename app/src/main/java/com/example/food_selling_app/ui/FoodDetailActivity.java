@@ -1,5 +1,6 @@
 package com.example.food_selling_app.ui;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.food_selling_app.R;
 
 import java.text.NumberFormat;
@@ -17,13 +20,14 @@ import java.util.Locale;
 
 public class FoodDetailActivity extends AppCompatActivity {
 
-    private ImageView imgFood;
+    private ImageView imgFood, btnBack;
     private TextView tvName, tvDescription, tvPrice, tvQuantity;
     private ImageButton btnPlus, btnMinus;
     private Button btnBuy, btnFavorite;
 
     private int quantity = 1;
-    private int unitPrice = 15000; // default
+    private int unitPrice = 15000; // Giá mặc định
+    private final String baseImageUrl = "http://10.0.2.2:8080/api/foods/images/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,7 @@ public class FoodDetailActivity extends AppCompatActivity {
 
         // Ánh xạ view
         imgFood = findViewById(R.id.imgFood);
+        btnBack = findViewById(R.id.btnBack);
         tvName = findViewById(R.id.tvName);
         tvDescription = findViewById(R.id.tvDescription);
         tvPrice = findViewById(R.id.tvPrice);
@@ -41,7 +46,7 @@ public class FoodDetailActivity extends AppCompatActivity {
         btnBuy = findViewById(R.id.btnBuy);
         btnFavorite = findViewById(R.id.btnFavorite);
 
-        // Nhận dữ liệu từ intent
+        // Nhận dữ liệu từ Intent
         String name = getIntent().getStringExtra("name");
         String description = getIntent().getStringExtra("description");
         String imageFilename = getIntent().getStringExtra("imageFilename");
@@ -52,11 +57,11 @@ public class FoodDetailActivity extends AppCompatActivity {
         tvDescription.setText(description);
         updateQuantityDisplay();
 
-        // Load ảnh bằng Glide (nếu dùng ảnh từ server)
+        // Load ảnh bằng Glide
         if (imageFilename != null && !imageFilename.isEmpty()) {
-            String imageUrl = "http://10.0.2.2:8080/api/foods/images/" + imageFilename;
+            String imageUrl = baseImageUrl + imageFilename;
             Glide.with(this)
-                    .load(imageUrl)
+                    .load(getGlideUrlWithToken(imageUrl))
                     .placeholder(R.drawable.placeholder)
                     .error(R.drawable.placeholder)
                     .into(imgFood);
@@ -77,22 +82,34 @@ public class FoodDetailActivity extends AppCompatActivity {
             }
         });
 
-        // Nút yêu thích
+        // Yêu thích
         btnFavorite.setOnClickListener(v -> {
             Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
         });
 
-        // Nút mua
+        // Mua hàng
         btnBuy.setOnClickListener(v -> {
             int total = quantity * unitPrice;
             String formattedTotal = NumberFormat.getNumberInstance(new Locale("vi", "VN")).format(total);
             Toast.makeText(this, "Đã mua " + quantity + " món với tổng: " + formattedTotal + " VND", Toast.LENGTH_SHORT).show();
         });
+
+        // Quay lại
+        btnBack.setOnClickListener(v -> finish());
     }
 
     private void updateQuantityDisplay() {
         tvQuantity.setText(String.valueOf(quantity));
         String formattedPrice = NumberFormat.getNumberInstance(new Locale("vi", "VN")).format(unitPrice * quantity);
         tvPrice.setText(formattedPrice + " VND");
+    }
+
+    private GlideUrl getGlideUrlWithToken(String imageUrl) {
+        SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
+        String token = prefs.getString("access_token", null);
+
+        return new GlideUrl(imageUrl, new LazyHeaders.Builder()
+                .addHeader("Authorization", "Bearer " + token)
+                .build());
     }
 }

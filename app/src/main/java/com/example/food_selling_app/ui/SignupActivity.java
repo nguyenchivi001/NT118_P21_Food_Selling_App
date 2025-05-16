@@ -2,6 +2,7 @@ package com.example.food_selling_app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,13 +49,26 @@ public class SignupActivity extends AppCompatActivity {
             String email = edtUsername.getText().toString().trim(); // dùng username làm email
             String password = edtPassword.getText().toString().trim();
 
-            RegisterRequest request = new RegisterRequest(name, email, password);
-            String error = request.validate();
-            if (error != null) {
-                Toast.makeText(SignupActivity.this, error, Toast.LENGTH_SHORT).show();
+            // Kiểm tra thông tin đầu vào
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            // Kiểm tra định dạng email
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Định dạng email không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Kiểm tra độ dài mật khẩu
+            if (password.length() < 6) {
+                Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Nếu tất cả kiểm tra đều hợp lệ, gửi yêu cầu đăng ký
+            RegisterRequest request = new RegisterRequest(name, email, password);
             AuthApi authApi = ApiClient.getClient(null).create(AuthApi.class);
 
             authApi.register(request).enqueue(new Callback<Void>() {
@@ -62,11 +76,17 @@ public class SignupActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(SignupActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                         finish(); // Quay lại login
                     } else if (response.code() == 409) {
                         Toast.makeText(SignupActivity.this, "Email đã tồn tại", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(SignupActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        try {
+                            String errorMessage = response.errorBody().string();
+                            Toast.makeText(SignupActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText(SignupActivity.this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
 
