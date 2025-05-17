@@ -1,16 +1,14 @@
 package com.example.food_selling_app.api;
 
-import com.example.food_selling_app.dto.AuthRequest;
-import com.example.food_selling_app.dto.AuthResponse;
-import com.example.food_selling_app.dto.LogoutRequest;
-import com.example.food_selling_app.dto.RefreshTokenRequest;
-import com.example.food_selling_app.dto.RegisterRequest;
-import com.example.food_selling_app.model.User;
+import com.example.food_selling_app.dto.request.AuthRequest;
+import com.example.food_selling_app.dto.response.AuthResponse;
+import com.example.food_selling_app.dto.request.LogoutRequest;
+import com.example.food_selling_app.dto.request.RefreshTokenRequest;
+import com.example.food_selling_app.dto.request.RegisterRequest;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface AuthApi {

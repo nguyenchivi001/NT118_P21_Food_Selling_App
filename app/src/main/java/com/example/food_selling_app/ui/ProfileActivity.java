@@ -2,7 +2,6 @@ package com.example.food_selling_app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -14,7 +13,7 @@ import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.AuthApi;
 import com.example.food_selling_app.api.UserApi;
-import com.example.food_selling_app.dto.LogoutRequest;
+import com.example.food_selling_app.dto.request.LogoutRequest;
 import com.example.food_selling_app.model.User;
 import com.example.food_selling_app.util.TokenManager;
 import com.google.android.material.button.MaterialButton;

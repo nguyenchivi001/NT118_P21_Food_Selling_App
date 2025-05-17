@@ -1,4 +1,4 @@
-package com.example.food_selling_app.dto;
+package com.example.food_selling_app.dto.response;
 
 import com.google.gson.annotations.SerializedName;
 
