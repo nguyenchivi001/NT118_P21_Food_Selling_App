@@ -2,13 +2,13 @@ package com.example.food_selling_app.ui;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.model.GlideUrl;
@@ -22,11 +22,11 @@ public class FoodDetailActivity extends AppCompatActivity {
 
     private ImageView imgFood, btnBack;
     private TextView tvName, tvDescription, tvPrice, tvQuantity;
-    private ImageButton btnPlus, btnMinus;
-    private Button btnBuy, btnFavorite;
+    private ImageButton btnPlus, btnMinus, btnFavorite;
+    private AppCompatButton btnBuy;
 
     private int quantity = 1;
-    private int unitPrice = 15000; // Giá mặc định
+    private int unitPrice = 15000;
     private final String baseImageUrl = "http://10.0.2.2:8080/api/foods/images/";
 
     @Override
@@ -69,12 +69,13 @@ public class FoodDetailActivity extends AppCompatActivity {
             imgFood.setImageResource(R.drawable.placeholder);
         }
 
-        // Xử lý tăng/giảm số lượng
+        // Tăng số lượng
         btnPlus.setOnClickListener(v -> {
             quantity++;
             updateQuantityDisplay();
         });
 
+        // Giảm số lượng
         btnMinus.setOnClickListener(v -> {
             if (quantity > 1) {
                 quantity--;
@@ -83,9 +84,9 @@ public class FoodDetailActivity extends AppCompatActivity {
         });
 
         // Yêu thích
-        btnFavorite.setOnClickListener(v -> {
-            Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
-        });
+        btnFavorite.setOnClickListener(v ->
+                Toast.makeText(this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show()
+        );
 
         // Mua hàng
         btnBuy.setOnClickListener(v -> {
