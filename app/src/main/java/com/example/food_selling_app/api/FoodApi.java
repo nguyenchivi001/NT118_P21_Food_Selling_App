@@ -1,9 +1,9 @@
 package com.example.food_selling_app.api;
 
-import com.example.food_selling_app.dto.ApiResponse;
+import com.example.food_selling_app.dto.response.ApiResponse;
 import com.example.food_selling_app.model.Category;
 import com.example.food_selling_app.model.Food;
-import com.example.food_selling_app.dto.FoodResponse;
+import com.example.food_selling_app.dto.response.FoodResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

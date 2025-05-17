@@ -15,8 +15,8 @@ import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.AuthApi;
 import com.example.food_selling_app.api.UserApi;
-import com.example.food_selling_app.dto.AuthRequest;
-import com.example.food_selling_app.dto.AuthResponse;
+import com.example.food_selling_app.dto.request.AuthRequest;
+import com.example.food_selling_app.dto.response.AuthResponse;
 import com.example.food_selling_app.model.User;
 import com.example.food_selling_app.util.TokenManager;
 
@@ -114,7 +114,17 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     User user = response.body();
                     Toast.makeText(LoginActivity.this, "Xin chào " + user.getName(), Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+
+                    // Kiểm tra role
+                    if ("user".equalsIgnoreCase(user.getRole())) {
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                    } else if ("admin".equalsIgnoreCase(user.getRole())) {
+                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Vai trò không hợp lệ: " + user.getRole(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     finish();
                 } else {
                     Log.e("USER_ME_FAIL", "Code: " + response.code());
