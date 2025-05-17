@@ -45,9 +45,6 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         holder.tvPrice.setText(format.format(item.getPrice()));  // ví dụ: 98.000 ₫
 
-        // Ngày tạm hardcode
-        holder.tvDate.setText("Feb 03, 2023");
-
         // Load ảnh từ drawable
         if (item.getImageFilename() != null && !item.getImageFilename().isEmpty()) {
             int resId = context.getResources().getIdentifier(
@@ -71,13 +68,12 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     public static class FavoriteViewHolder extends RecyclerView.ViewHolder {
         ImageView imgFood, imgFavorite;
-        TextView tvName, tvDate, tvPrice;
+        TextView tvName, tvPrice;
 
         public FavoriteViewHolder(@NonNull View itemView) {
             super(itemView);
             imgFood = itemView.findViewById(R.id.imgFood);
             tvName = itemView.findViewById(R.id.tvName);
-            tvDate = itemView.findViewById(R.id.tvDate);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             imgFavorite = itemView.findViewById(R.id.imgFavorite);
         }
