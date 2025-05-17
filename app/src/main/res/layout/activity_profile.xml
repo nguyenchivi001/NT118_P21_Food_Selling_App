@@ -1,169 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
+    <!-- Header -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_profile_header"
+        android:layout_marginBottom="16dp">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentStart="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back" />
+
+        <ImageView
+            android:id="@+id/imgAvatar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:scaleType="centerCrop"
+            android:background="@drawable/bg_avatar_circle"
+            android:src="@drawable/ic_user" />
+    </RelativeLayout>
+
+    <!-- Form thông tin -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:gravity="center_horizontal">
+        android:paddingHorizontal="16dp">
 
-        <!-- Header với hình nền đỏ -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@drawable/bg_profile_header"
-            android:layout_marginBottom="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#888888" />
 
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_alignParentStart="true"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_back"
-                android:contentDescription="Back" />
-
-            <!-- Avatar -->
-            <ImageView
-                android:id="@+id/imgAvatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_centerInParent="true"
-                android:scaleType="centerCrop"
-                android:background="@drawable/bg_avatar_circle"
-                android:src="@drawable/ic_user" />
-        </RelativeLayout>
-
-        <!-- Form thông tin người dùng -->
-        <LinearLayout
+        <EditText
+            android:id="@+id/edtName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="Sophia Patel"
+            android:background="@drawable/bg_edittext"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:inputType="textPersonName" />
 
-            <!-- Name -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Name"
-                android:textSize="12sp"
-                android:textColor="#888888" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:textColor="#888888"
+            android:layout_marginTop="12dp"
+            android:textStyle="bold"/>
 
-            <EditText
-                android:id="@+id/edtName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Sophia Patel"
-                android:background="@drawable/bg_edittext"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:padding="12dp"
-                android:inputType="textPersonName" />
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="sophiapatel@gmail.com"
+            android:background="@drawable/bg_edittext"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:inputType="textEmailAddress" />
+    </LinearLayout>
 
-            <!-- Email -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textSize="12sp"
-                android:textColor="#888888"
-                android:layout_marginTop="12dp" />
+    <!-- ScrollView chỉ cho Chi tiết thanh toán và Lịch sử đơn hàng -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:layout_marginTop="24dp">
 
-            <EditText
-                android:id="@+id/edtEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="sophiapatel@gmail.com"
-                android:background="@drawable/bg_edittext"
-                android:textColor="#000000"
-                android:textSize="14sp"
-                android:padding="12dp"
-                android:inputType="textEmailAddress" />
-
-        </LinearLayout>
-
-        <!-- Các tùy chọn -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="24dp">
+            android:paddingHorizontal="16dp">
 
             <TextView
+                android:id="@+id/tvPaymentDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Chi tiết thanh toán"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textColor="#000000"
                 android:padding="16dp"
                 android:drawableEnd="@drawable/ic_arrow_right"
                 android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackground" />
 
+            <LinearLayout
+                android:id="@+id/expandPaymentDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="32dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Mã đơn hàng: #123456"
+                    android:textSize="18sp"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Tổng tiền: 300.000 VND"
+                    android:textSize="18sp"
+                    android:padding="8dp" />
+            </LinearLayout>
+
             <TextView
+                android:id="@+id/tvOrderHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Lịch sử đơn hàng"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 android:textColor="#000000"
                 android:padding="16dp"
                 android:drawableEnd="@drawable/ic_arrow_right"
                 android:gravity="center_vertical"
                 android:background="?attr/selectableItemBackground" />
-        </LinearLayout>
 
-        <!-- Nút -->
-        <LinearLayout
-            android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/expandOrderHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="32dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Đơn ngày 01/05/2025 - 150.000 VND"
+                    android:textSize="18sp"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• Đơn ngày 10/05/2025 - 185.000 VND"
+                    android:textSize="18sp"
+                    android:padding="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Nút -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="16dp"
+        android:paddingBottom="32dp"
+        android:weightSum="2">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEditProfile"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:weightSum="2"
-            android:layout_marginBottom="32dp">
+            android:layout_weight="1"
+            android:text="Chỉnh sửa hồ sơ"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3A2C29"
+            app:icon="@drawable/ic_edit"
+            app:iconTint="@android:color/white"
+            app:iconGravity="textEnd"
+            app:iconPadding="8dp"
+            app:cornerRadius="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingVertical="12dp" />
 
-            <!-- Edit Profile Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnEditProfile"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Chỉnh sửa hồ sơ"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#3A2C29"
-                app:icon="@drawable/ic_edit"
-                app:iconTint="@android:color/white"
-                app:iconGravity="textEnd"
-                app:iconPadding="8dp"
-                android:paddingVertical="12dp"
-                android:layout_marginEnd="8dp"
-                app:cornerRadius="24dp"
-                app:rippleColor="@android:color/transparent" />
-
-            <!-- Log Out Button -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnLogout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Đăng xuất"
-                android:textColor="#EF2A39"
-                android:backgroundTint="@android:color/transparent"
-                app:strokeColor="@color/redAccent"
-                app:strokeWidth="2dp"
-                app:icon="@drawable/ic_logout"
-                app:iconTint="@color/redAccent"
-                app:iconGravity="textEnd"
-                app:iconPadding="8dp"
-                app:cornerRadius="24dp"
-                app:rippleColor="@android:color/transparent"
-                android:layout_marginStart="8dp"
-                android:paddingVertical="12dp"
-                android:paddingHorizontal="24dp" />
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đăng xuất"
+            android:textColor="#EF2A39"
+            android:backgroundTint="@android:color/transparent"
+            app:strokeColor="@color/redAccent"
+            app:strokeWidth="2dp"
+            app:icon="@drawable/ic_logout"
+            app:iconTint="@color/redAccent"
+            app:iconGravity="textEnd"
+            app:iconPadding="8dp"
+            app:cornerRadius="8dp"
+            android:layout_marginStart="8dp"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="24dp" />
     </LinearLayout>
-</ScrollView>
+
+</LinearLayout>
