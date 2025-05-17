@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.AuthApi;
-import com.example.food_selling_app.dto.RegisterRequest;
+import com.example.food_selling_app.dto.request.RegisterRequest;
 
 import retrofit2.Call;
 import retrofit2.Callback;

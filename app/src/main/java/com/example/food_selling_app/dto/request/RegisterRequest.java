@@ -1,4 +1,4 @@
-package com.example.food_selling_app.dto;
+package com.example.food_selling_app.dto.request;
 
 import android.util.Patterns;
 
