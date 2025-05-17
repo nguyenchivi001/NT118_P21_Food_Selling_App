@@ -1,154 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:fitsSystemWindows="true">
 
+    <!-- Phần đầu: ảnh + tên món -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:layout_marginBottom="8dp">
 
-        <!-- Back and Search -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="16dp">
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginBottom="12dp"
+            android:padding="6dp"
+            android:background="@drawable/bg_circle_white"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Back"
+            android:scaleType="centerInside"
+            android:elevation="4dp" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1" />
-
-            <ImageView
-                android:id="@+id/btnBack"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/ic_back" />
-
-        </LinearLayout>
-
-        <!-- Food Image -->
         <ImageView
             android:id="@+id/imgFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="220dp"
             android:adjustViewBounds="true"
+            android:maxHeight="300dp"
             android:scaleType="fitCenter"
-            android:layout_marginBottom="16dp"
+            android:contentDescription="Ảnh món ăn"
             android:src="@drawable/burger1" />
 
-        <!-- Title -->
         <TextView
             android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineSpacingExtra="10dp"
             android:text="Burger phô mai Wendy's"
-            android:textSize="22sp"
-            android:textStyle="bold"
             android:textColor="#000000"
-            android:layout_marginBottom="6dp" />
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-        <!-- Description -->
+    <!-- Mô tả scroll được -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="16dp">
+
         <TextView
             android:id="@+id/tvDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Burger phô mai Wendy’s là món ăn nhanh cổ điển, mang đến hương vị đậm đà trong từng miếng cắn."
+            android:layout_marginBottom="12dp"
+            android:lineSpacingExtra="10dp"
+            android:text="Burger phô mai Wendy’s là món ăn nhanh cổ điển. Mô tả rất dài ở đây sẽ cuộn lên xuống khi nội dung vượt quá chiều cao màn hình. Thêm nhiều dòng để test cuộn...\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum justo at risus luctus, vitae imperdiet lorem tincidunt. Integer viverra sem justo, ac vulputate felis finibus id."
             android:textColor="#444444"
-            android:textSize="16sp"
-            android:layout_marginBottom="12dp" />
+            android:textSize="20sp" />
+    </ScrollView>
 
-        <!-- Quantity Section -->
+    <!-- Số lượng + Giá: cố định giữa -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             android:text="Số lượng"
             android:textColor="#000000"
-            android:textSize="14sp"
-            android:layout_marginBottom="6dp" />
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/bg_quantity"
-            android:padding="6dp"
             android:gravity="center"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal"
+            android:padding="6dp">
 
             <ImageButton
                 android:id="@+id/btnMinus"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@drawable/bg_round"
-                app:tint="@android:color/white"
+                android:contentDescription="Giảm"
                 android:src="@drawable/ic_minus"
-                android:contentDescription="Decrease" />
+                app:tint="@android:color/white" />
 
             <TextView
                 android:id="@+id/tvQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
                 android:text="2"
-                android:textSize="16sp"
                 android:textColor="#000000"
-                android:layout_marginHorizontal="16dp" />
+                android:textSize="24sp" />
 
             <ImageButton
                 android:id="@+id/btnPlus"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
                 android:background="@drawable/bg_round"
-                app:tint="@android:color/white"
+                android:contentDescription="Tăng"
                 android:src="@drawable/ic_plus"
-                android:contentDescription="Increase" />
+                app:tint="@android:color/white" />
         </LinearLayout>
 
-        <!-- Price -->
         <TextView
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
             android:text="15.000 VND"
             android:textColor="#EF2A39"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="20dp" />
-
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_marginBottom="24dp">
-
-            <Button
-                android:id="@+id/btnFavorite"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="Yêu thích"
-                android:backgroundTint="#EF2A39"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnBuy"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="Mua"
-                android:backgroundTint="#3A2C29"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_marginStart="12dp" />
-        </LinearLayout>
+            android:textSize="32sp"
+            android:textStyle="bold" />
     </LinearLayout>
-</ScrollView>
+
+    <!-- Nút yêu thích và giỏ hàng: cố định dưới -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:padding="16dp"
+        android:paddingBottom="24dp"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        android:fitsSystemWindows="true">
+
+        <ImageButton
+            android:id="@+id/btnFavorite"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_filled"
+            android:src="@drawable/ic_favorite"
+            android:contentDescription="Yêu thích"
+            android:padding="10dp"
+            android:scaleType="centerInside"
+            app:tint="@android:color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBuy"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="2"
+            android:background="@drawable/bg_button_rect_dark"
+            android:text="Thêm vào giỏ hàng"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
