@@ -22,8 +22,7 @@
             android:id="@+id/btnBack"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_back"
-            android:tint="@android:color/white" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="0dp"
@@ -44,30 +43,12 @@
             android:scaleType="centerCrop" />
     </LinearLayout>
 
-    <!-- Search bar -->
-    <EditText
-        android:id="@+id/edtSearch"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_below="@id/header"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/bg_edittext"
-        android:hint="Tìm kiếm mục yêu thích..."
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="10dp" />
-
     <!-- Danh sách yêu thích -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFavorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/edtSearch"
+        android:layout_marginTop="70dp"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="12dp"
