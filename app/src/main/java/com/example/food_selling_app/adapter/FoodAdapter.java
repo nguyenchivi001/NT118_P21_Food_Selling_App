@@ -1,5 +1,6 @@
 package com.example.food_selling_app.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,12 +67,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, FoodDetailActivity.class);
-            intent.putExtra("name", item.getName());
-            intent.putExtra("description", item.getDescription());
-            intent.putExtra("price", item.getPrice().toString());
-            intent.putExtra("imageFilename", item.getImageFilename());
-            intent.putExtra("stockQuantity", item.getStockQuantity());
-            intent.putExtra("available", item.isAvailable());
+            intent.putExtra("foodId", item.getId());
             context.startActivity(intent);
         });
     }

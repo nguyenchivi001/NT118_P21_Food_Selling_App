@@ -4,6 +4,13 @@ public class CartItemRequest {
     private Integer foodId;
     private Integer quantity;
 
+    public CartItemRequest() {}
+
+    public CartItemRequest(Integer foodId, Integer quantity) {
+        this.quantity = quantity;
+        this.foodId = foodId;
+    }
+
     public Integer getFoodId() {
         return foodId;
     }

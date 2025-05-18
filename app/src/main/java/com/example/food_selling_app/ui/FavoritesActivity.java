@@ -1,17 +1,10 @@
 package com.example.food_selling_app.ui;
 
-import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,13 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.adapter.FavoritesAdapter;
 import com.example.food_selling_app.api.ApiClient;
-import com.example.food_selling_app.api.CartApi;
 import com.example.food_selling_app.api.FavoriteApi;
 import com.example.food_selling_app.dto.response.ApiResponse;
 import com.example.food_selling_app.model.FavoriteItem;
-import com.example.food_selling_app.model.Food;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 

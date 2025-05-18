@@ -1,19 +1,17 @@
 package com.example.food_selling_app.model;
 
-import java.math.BigDecimal;
-
 public class Food {
     private int id;
     private String name;
     private String description;
-    private BigDecimal price; // Changed to BigDecimal to match backend
-    private String imageFilename; // Changed to imageFilename to match backend field name
-    private int categoryId; // Simplified to categoryId (assuming frontend only needs the ID)
-    private int stockQuantity; // Added to match backend
-    private boolean available; // Added to match backend
+    private Double price;
+    private String imageFilename;
+    private int categoryId;
+    private int stockQuantity;
+    private boolean available;
 
     // Constructor
-    public Food(int id, String name, String description, BigDecimal price, String imageFilename,
+    public Food(int id, String name, String description, Double price, String imageFilename,
                 int categoryId, int stockQuantity, boolean available) {
         this.id = id;
         this.name = name;
@@ -38,7 +36,7 @@ public class Food {
         return description;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -71,7 +69,7 @@ public class Food {
         this.description = description;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
