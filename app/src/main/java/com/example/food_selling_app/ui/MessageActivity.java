@@ -1,7 +1,6 @@
 package com.example.food_selling_app.ui;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;

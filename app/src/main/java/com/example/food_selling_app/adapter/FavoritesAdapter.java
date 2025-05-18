@@ -16,7 +16,6 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.model.FavoriteItem;
-import com.example.food_selling_app.model.Food;
 
 import java.text.NumberFormat;
 import java.util.List;

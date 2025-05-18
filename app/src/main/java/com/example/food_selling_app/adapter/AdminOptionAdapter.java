@@ -15,9 +15,6 @@ import com.example.food_selling_app.model.AdminOption;
 
 import java.util.List;
 
-/**
- * Adapter hiển thị danh sách các tùy chọn trong trang Home của Admin
- */
 public class AdminOptionAdapter extends RecyclerView.Adapter<AdminOptionAdapter.OptionViewHolder> {
 
     private final Context context;
