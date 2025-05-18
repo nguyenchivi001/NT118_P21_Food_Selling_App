@@ -11,10 +11,12 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
         <ImageView
             android:id="@+id/btnBack"
@@ -28,7 +30,7 @@
             android:layout_weight="1"
             android:text="Đơn hàng"
             android:textStyle="bold"
-            android:textColor="#000"
+            android:textColor="#000000"
             android:textSize="18sp"
             android:gravity="center" />
 
@@ -41,31 +43,45 @@
             android:scaleType="centerCrop" />
     </LinearLayout>
 
-    <!-- Danh sách sản phẩm -->
+    <!-- Empty Text -->
+    <TextView
+        android:id="@+id/tvEmptyCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header"
+        android:layout_marginTop="40dp"
+        android:text="Giỏ hàng trống"
+        android:textAlignment="center"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@+id/footer"
         android:layout_below="@id/header"
-        android:clipToPadding="false"
+        android:layout_above="@id/footer"
         android:paddingHorizontal="12dp"
         android:paddingTop="8dp"
-        android:paddingBottom="4dp" />
+        android:paddingBottom="4dp"
+        android:clipToPadding="false" />
 
     <!-- Footer -->
     <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_alignParentBottom="true"
-        android:paddingHorizontal="16dp"
+        android:orientation="vertical"
+        android:background="#FAFAFA"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:paddingTop="12dp"
-        android:paddingBottom="20dp"
-        android:background="#FAFAFA">
+        android:paddingBottom="20dp">
 
-        <!-- Subtotal row -->
+        <!-- Subtotal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,13 +100,13 @@
                 android:id="@+id/tvSubtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="98.000 VND"
+                android:text="0 VND"
                 android:textStyle="bold"
-                android:textSize="15sp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="15sp" />
         </LinearLayout>
 
-        <!-- Delivery row -->
+        <!-- Delivery -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +127,7 @@
                 android:textColor="#4CAF50" />
         </LinearLayout>
 
-        <!-- Total row -->
+        <!-- Total -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -123,21 +139,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Tổng tiền"
-                android:textColor="#000000"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="98.000 VND"
-                android:textColor="#000000"
+                android:text="0 VND"
                 android:textStyle="bold"
+                android:textColor="#000000"
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <!-- Checkout button -->
+        <!-- Button -->
         <Button
             android:id="@+id/btnCheckout"
             android:layout_width="200dp"

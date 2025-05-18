@@ -2,6 +2,7 @@ package com.example.food_selling_app.ui;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -31,11 +32,12 @@ public class FavoritesActivity extends AppCompatActivity {
     private List<FavoriteItem> favoriteList;
     private FavoriteApi favoriteApi;
     private String accessToken;
-
+    private TextView tvEmptyFavorites;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
+        tvEmptyFavorites = findViewById(R.id.tvEmptyFavorites);
 
         recyclerFavorites = findViewById(R.id.recyclerFavorites);
         ImageView btnBack = findViewById(R.id.btnBack);
@@ -90,6 +92,7 @@ public class FavoritesActivity extends AppCompatActivity {
                     favoriteList.clear();
                     favoriteList.addAll(response.body().getData());
                     favoriteAdapter.notifyDataSetChanged();
+                    updateEmptyState();
                 } else {
                     Toast.makeText(FavoritesActivity.this, "Failed to load favorites", Toast.LENGTH_SHORT).show();
                 }
@@ -111,6 +114,7 @@ public class FavoritesActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     favoriteList.remove(position);
                     favoriteAdapter.notifyItemRemoved(position);
+                    updateEmptyState();
                 } else {
                     Toast.makeText(FavoritesActivity.this, "Failes to remove item", Toast.LENGTH_SHORT).show();
                     favoriteAdapter.notifyItemChanged(position);
@@ -123,5 +127,15 @@ public class FavoritesActivity extends AppCompatActivity {
                 favoriteAdapter.notifyItemChanged(position);
             }
         });
+    }
+
+    private void updateEmptyState() {
+        if (favoriteList.isEmpty()) {
+            tvEmptyFavorites.setVisibility(TextView.VISIBLE);
+            recyclerFavorites.setVisibility(RecyclerView.GONE);
+        } else {
+            tvEmptyFavorites.setVisibility(TextView.GONE);
+            recyclerFavorites.setVisibility(RecyclerView.VISIBLE);
+        }
     }
 }
