@@ -100,8 +100,7 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_round"
                 android:contentDescription="Giảm"
-                android:src="@drawable/ic_minus"
-                app:tint="@android:color/white" />
+                android:src="@drawable/ic_minus"/>
 
             <TextView
                 android:id="@+id/tvQuantity"
@@ -118,8 +117,7 @@
                 android:layout_height="36dp"
                 android:background="@drawable/bg_round"
                 android:contentDescription="Tăng"
-                android:src="@drawable/ic_plus"
-                app:tint="@android:color/white" />
+                android:src="@drawable/ic_plus"/>
         </LinearLayout>
 
         <TextView
@@ -154,8 +152,7 @@
             android:src="@drawable/ic_favorite"
             android:contentDescription="Yêu thích"
             android:padding="10dp"
-            android:scaleType="centerInside"
-            app:tint="@android:color/white" />
+            android:scaleType="centerInside"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnBuy"

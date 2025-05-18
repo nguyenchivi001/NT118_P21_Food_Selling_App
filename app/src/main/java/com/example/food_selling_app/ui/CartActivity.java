@@ -37,10 +37,11 @@ public class CartActivity extends AppCompatActivity {
     private RecyclerView recyclerCart;
     private CartAdapter cartAdapter;
     private List<CartItem> cartList;
-    private TextView tvSubtotal, tvTotal;
+    private TextView tvSubtotal, tvTotal, tvEmptyCart;
     private Button btnCheckout;
     private CartApi cartApi;
     private String accessToken;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class CartActivity extends AppCompatActivity {
         tvSubtotal = findViewById(R.id.tvSubtotal);
         tvTotal = findViewById(R.id.tvTotal);
         btnCheckout = findViewById(R.id.btnCheckout);
+        tvEmptyCart = findViewById(R.id.tvEmptyCart);
 
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
@@ -112,6 +114,7 @@ public class CartActivity extends AppCompatActivity {
                     cartList.addAll(response.body().getData());
                     cartAdapter.notifyDataSetChanged();
                     updateTotal();
+                    updateEmptyState();
                 } else {
                     Toast.makeText(CartActivity.this, "Failed to load cart", Toast.LENGTH_SHORT).show();
                 }
@@ -160,6 +163,7 @@ public class CartActivity extends AppCompatActivity {
                     cartList.remove(position);
                     cartAdapter.notifyItemRemoved(position);
                     updateTotal();
+                    updateEmptyState();
                 } else {
                     Toast.makeText(CartActivity.this, "Failed to remove item", Toast.LENGTH_SHORT).show();
                     cartAdapter.notifyItemChanged(position); // Khôi phục giao diện nếu xóa thất bại
@@ -172,6 +176,16 @@ public class CartActivity extends AppCompatActivity {
                 cartAdapter.notifyItemChanged(position); // Khôi phục giao diện nếu xóa thất bại
             }
         });
+    }
+
+    private void updateEmptyState() {
+        if (cartList.isEmpty()) {
+            tvEmptyCart.setVisibility(TextView.VISIBLE);
+            recyclerCart.setVisibility(RecyclerView.GONE);
+        } else {
+            tvEmptyCart.setVisibility(TextView.GONE);
+            recyclerCart.setVisibility(RecyclerView.VISIBLE);
+        }
     }
 
     private void updateTotal() {

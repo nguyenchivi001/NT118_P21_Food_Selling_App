@@ -1,6 +1,7 @@
 package com.example.food_selling_app.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.food_selling_app.R;
-import com.example.food_selling_app.model.Food;
+import com.example.food_selling_app.model.FavoriteItem;
 
 import java.text.NumberFormat;
 import java.util.List;
@@ -20,9 +24,11 @@ import java.util.Locale;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.FavoriteViewHolder> {
 
     private final Context context;
-    private final List<Food> favoriteList;
+    private final List<FavoriteItem> favoriteList;
 
-    public FavoritesAdapter(Context context, List<Food> favoriteList) {
+    private final String baseImageUrl = "http://10.0.2.2:8080/api/foods/images/";
+
+    public FavoritesAdapter(Context context, List<FavoriteItem> favoriteList) {
         this.context = context;
         this.favoriteList = favoriteList;
     }
@@ -36,38 +42,37 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteViewHolder holder, int position) {
-        Food item = favoriteList.get(position);
+        FavoriteItem item = favoriteList.get(position);
 
         // Tên món
-        holder.tvName.setText(item.getName());
+        holder.tvName.setText(item.getFoodName());
 
         // Format giá VND
-        NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
-        holder.tvPrice.setText(format.format(item.getPrice()));  // ví dụ: 98.000 ₫
+        NumberFormat formatter = NumberFormat.getNumberInstance(new Locale("vi", "VN"));
+        String formattedPrice = formatter.format(item.getPrice()) + "đ";
+        holder.tvPrice.setText(formattedPrice);
 
         // Load ảnh từ drawable
-        if (item.getImageFilename() != null && !item.getImageFilename().isEmpty()) {
-            int resId = context.getResources().getIdentifier(
-                    item.getImageFilename().replace(".png", ""), "drawable", context.getPackageName()
-            );
-            holder.imgFood.setImageResource(resId != 0 ? resId : R.drawable.placeholder);
+        String imageFilename = item.getImageFilename();
+        if (imageFilename != null && !imageFilename.isEmpty()) {
+            String imageUrl = baseImageUrl + imageFilename;
+            Glide.with(context)
+                    .load(getGlideUrlWithToken(imageUrl))
+                    .placeholder(R.drawable.burger1)
+                    .error(R.drawable.burger1)
+                    .into(holder.imgFood);
         } else {
-            holder.imgFood.setImageResource(R.drawable.placeholder);
+            holder.imgFood.setImageResource(R.drawable.burger1);
         }
     }
 
     @Override
     public int getItemCount() {
-        return favoriteList.size();
-    }
-
-    public void removeItem(int position) {
-        favoriteList.remove(position);
-        notifyItemRemoved(position);
+        return favoriteList != null ? favoriteList.size() : 0;
     }
 
     public static class FavoriteViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgFood, imgFavorite;
+        ImageView imgFood;
         TextView tvName, tvPrice;
 
         public FavoriteViewHolder(@NonNull View itemView) {
@@ -75,7 +80,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.Favo
             imgFood = itemView.findViewById(R.id.imgFood);
             tvName = itemView.findViewById(R.id.tvName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            imgFavorite = itemView.findViewById(R.id.imgFavorite);
         }
+    }
+
+    private GlideUrl getGlideUrlWithToken(String imageUrl) {
+        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        String token = prefs.getString("access_token", null);
+
+        return new GlideUrl(imageUrl, new LazyHeaders.Builder()
+                .addHeader("Authorization", "Bearer " + token)
+                .build());
     }
 }
