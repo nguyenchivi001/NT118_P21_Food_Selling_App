@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <!-- Nội dung chính -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingHorizontal="20dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:paddingTop="20dp"
         android:paddingBottom="8dp">
 
-        <!-- Header -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,7 +39,6 @@
             android:textColor="#777777"
             android:layout_marginTop="2dp" />
 
-        <!-- Search Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -67,10 +65,8 @@
                 android:textColor="#000"
                 android:textColorHint="#999999"
                 android:textSize="14sp"/>
-
         </LinearLayout>
 
-        <!-- Tabs -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -120,25 +116,23 @@
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="8dp"
                     android:textStyle="bold" />
-
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Danh sách món ăn -->
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="12dp">
 
-            <!-- RecyclerView cho danh sách món ăn -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvFoodList"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:paddingBottom="90dp"
+                android:clipToPadding="false" />
 
-            <!-- TextView hiển thị khi không có sản phẩm -->
             <TextView
                 android:id="@+id/tvNoProducts"
                 android:layout_width="match_parent"
@@ -148,11 +142,9 @@
                 android:textColor="#777777"
                 android:gravity="center"
                 android:visibility="gone" />
-
         </FrameLayout>
     </LinearLayout>
 
-    <!-- BottomAppBar chỉ dùng để tạo lõm -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
@@ -165,7 +157,6 @@
         app:fabCradleMargin="8dp"
         app:hideOnScroll="false" />
 
-    <!-- BottomNavigationView đặt trong FrameLayout để bo góc -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -182,5 +173,4 @@
             android:background="@android:color/transparent"
             app:labelVisibilityMode="labeled"/>
     </FrameLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

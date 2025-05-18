@@ -2,11 +2,14 @@ package com.example.food_selling_app.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.AuthApi;
@@ -37,18 +40,14 @@ public class ProfileActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
 
-        // Khởi tạo nút Back
         ImageView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
 
-        // Khởi tạo nút Logout
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Lấy email và token từ TokenManager
         userEmail = TokenManager.getEmail(this);
         userToken = TokenManager.getAccessToken(this);
 
-        // Kiểm tra email có tồn tại không
         if (userEmail == null) {
             Toast.makeText(this, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
             redirectToLogin();
@@ -57,29 +56,45 @@ public class ProfileActivity extends AppCompatActivity {
 
         fetchUserProfile();
 
-        // Gắn sự kiện nhấn nút Logout
         btnLogout.setOnClickListener(v -> showLogoutConfirmationDialog());
+
+        // Xử lý sổ xuống Chi tiết thanh toán & Lịch sử đơn hàng
+        View expandPaymentDetails = findViewById(R.id.expandPaymentDetails);
+        View expandOrderHistory = findViewById(R.id.expandOrderHistory);
+        View tvPaymentDetails = findViewById(R.id.tvPaymentDetails);
+        View tvOrderHistory = findViewById(R.id.tvOrderHistory);
+
+        tvPaymentDetails.setOnClickListener(v -> {
+            if (expandPaymentDetails.getVisibility() == View.GONE) {
+                expandPaymentDetails.setVisibility(View.VISIBLE);
+            } else {
+                expandPaymentDetails.setVisibility(View.GONE);
+            }
+        });
+
+        tvOrderHistory.setOnClickListener(v -> {
+            if (expandOrderHistory.getVisibility() == View.GONE) {
+                expandOrderHistory.setVisibility(View.VISIBLE);
+            } else {
+                expandOrderHistory.setVisibility(View.GONE);
+            }
+        });
     }
 
-    // Hiển thị dialog xác nhận đăng xuất
     private void showLogoutConfirmationDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Xác nhận đăng xuất")
                 .setMessage("Bạn có chắc chắn muốn đăng xuất khỏi tài khoản?")
                 .setPositiveButton("Đăng xuất", (dialog, which) -> performLogout())
                 .setNegativeButton("Hủy", null)
-                .setCancelable(true).show();
+                .setCancelable(true)
+                .show();
     }
 
-    // Thực hiện đăng xuất
     private void performLogout() {
-        // Sử dụng ApiClient để tạo Retrofit instance
         AuthApi authApi = ApiClient.getClient(userToken).create(AuthApi.class);
-
-        // Tạo request body
         LogoutRequest logoutRequest = new LogoutRequest(userEmail);
 
-        // Gửi yêu cầu đăng xuất
         Call<ResponseBody> call = authApi.logout(logoutRequest);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -89,7 +104,7 @@ public class ProfileActivity extends AppCompatActivity {
                     redirectToLogin();
                     Toast.makeText(ProfileActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(ProfileActivity.this, "Đăng xuất thất bại: ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileActivity.this, "Đăng xuất thất bại", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -123,7 +138,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    // Chuyển hướng về LoginActivity
     private void redirectToLogin() {
         Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
