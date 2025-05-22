@@ -1,5 +1,6 @@
 package com.example.food_selling_app.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -101,7 +102,12 @@ public class CartActivity extends AppCompatActivity {
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerCart);
 
         // Xử lý nút checkout (chưa hiện thực)
-        btnCheckout.setOnClickListener(v -> Toast.makeText(this, "Checkout not implemented", Toast.LENGTH_SHORT).show());
+        btnCheckout = findViewById(R.id.btnCheckout);
+        btnCheckout.setOnClickListener(v -> {
+            Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     private void loadCartItems() {
