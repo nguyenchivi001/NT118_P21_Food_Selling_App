@@ -143,7 +143,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    String name = response.body().getName();
+                    User user = response.body();
+                    String name = user.getName();
+                    int userId = user.getId();
+
+                    TokenManager.saveUserId(LoginActivity.this, userId);
                     Toast.makeText(LoginActivity.this, "Xin chào " + name, Toast.LENGTH_SHORT).show();
                 } else {
                     Log.e("USER_NAME_FAIL", "Không lấy được tên người dùng");

@@ -89,17 +89,19 @@
                 android:layout_marginBottom="24dp">
 
                 <TextView
+                    android:id="@+id/tvOrderTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Đơn hàng: 380.000đ"
+                    android:text="Đơn hàng: 0đ"
                     android:textSize="18sp"
                     android:textColor="#444444"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
+                    android:id="@+id/tvShippingFee"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Phí giao hàng: 10.000đ"
+                    android:text="Phí giao hàng: 0đ"
                     android:textSize="18sp"
                     android:textColor="#444444"
                     android:layout_marginBottom="12dp" />
@@ -111,9 +113,10 @@
                     android:layout_marginVertical="12dp" />
 
                 <TextView
+                    android:id="@+id/tvTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tổng cộng: 410.000đ"
+                    android:text="Tổng cộng: 0đ"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#EF2A39" />
@@ -160,7 +163,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thẻ tín dụng (**** 5105)"
+                    android:text="Thẻ MasterCard"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
@@ -197,7 +200,6 @@
         </LinearLayout>
     </ScrollView>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -210,10 +212,11 @@
         android:gravity="center_vertical">
 
         <TextView
+            android:id="@+id/tvFooterTotal"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tổng: 410.000đ"
+            android:text="Tổng: 0đ"
             android:textColor="#EF2A39"
             android:textSize="23sp"
             android:textStyle="bold" />
@@ -222,7 +225,7 @@
             android:id="@+id/btnPayNow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Thanh toán ngay"
+            android:text="Đặt hàng"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -231,5 +234,4 @@
             android:paddingVertical="10dp"
             app:cornerRadius="16dp" />
     </LinearLayout>
-
 </FrameLayout>
