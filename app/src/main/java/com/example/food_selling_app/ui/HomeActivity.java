@@ -13,12 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,8 +25,6 @@ import com.example.food_selling_app.dto.response.ApiResponse;
 import com.example.food_selling_app.dto.response.FoodResponse;
 import com.example.food_selling_app.model.Category;
 import com.example.food_selling_app.model.Food;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -43,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends BaseActivity {
 
     private RecyclerView rvFoodList;
     private TextView tvNoProducts;
@@ -56,16 +49,19 @@ public class HomeActivity extends AppCompatActivity {
     private EditText edtSearch;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_home;
+    }
+
+    @Override
+    protected int getSelectedNavItem() {
+        return R.id.nav_home;
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         String token = prefs.getString("access_token", "");
@@ -89,34 +85,9 @@ public class HomeActivity extends AppCompatActivity {
         tabContainer = findViewById(R.id.tabContainer);
         edtSearch = findViewById(R.id.edtSearch);
 
-        setupBottomNavigation();
         setupSearch();
         loadCategories();
         loadFoodsByCategory(selectedCategoryId, "");
-    }
-
-    private void setupBottomNavigation() {
-        BottomAppBar bottomAppBar = findViewById(R.id.bottom_app_bar);
-        bottomAppBar.replaceMenu(R.menu.bottom_nav_menu);
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_profile) {
-                startActivity(new Intent(this, ProfileActivity.class));
-                return true;
-            } else if (id == R.id.nav_message) {
-                startActivity(new Intent(this, MessageActivity.class));
-                return true;
-            } else if (id == R.id.nav_cart) {
-                startActivity(new Intent(this, CartActivity.class));
-                return true;
-            } else if (id == R.id.nav_favorites) {
-                startActivity(new Intent(this, FavoritesActivity.class));
-                return true;
-            }
-            return false;
-        });
     }
 
     private void setupSearch() {
@@ -144,7 +115,6 @@ public class HomeActivity extends AppCompatActivity {
                     categories.clear();
                     categories.addAll(response.body().getData());
                     createCategoryTabs();
-                    // Nếu không có danh mục, hiển thị thông báo
                     if (categories.isEmpty()) {
                         rvFoodList.setVisibility(View.GONE);
                         tvNoProducts.setVisibility(View.VISIBLE);
@@ -175,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
                     List<Food> foods = response.body().getData().getFoods();
                     foodList.addAll(foods != null ? foods : new ArrayList<>());
                     adapter.notifyDataSetChanged();
-                    // Kiểm tra danh sách món ăn
+
                     if (foodList.isEmpty()) {
                         rvFoodList.setVisibility(View.GONE);
                         tvNoProducts.setVisibility(View.VISIBLE);
