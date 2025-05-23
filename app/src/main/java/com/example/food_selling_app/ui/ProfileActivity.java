@@ -16,7 +16,7 @@ import com.example.food_selling_app.api.AuthApi;
 import com.example.food_selling_app.api.UserApi;
 import com.example.food_selling_app.dto.request.LogoutRequest;
 import com.example.food_selling_app.model.User;
-import com.example.food_selling_app.util.TokenManager;
+import com.example.food_selling_app.utils.TokenManager;
 import com.google.android.material.button.MaterialButton;
 
 import okhttp3.ResponseBody;

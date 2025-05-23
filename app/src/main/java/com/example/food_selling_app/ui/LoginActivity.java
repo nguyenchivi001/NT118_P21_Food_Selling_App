@@ -18,7 +18,10 @@ import com.example.food_selling_app.api.UserApi;
 import com.example.food_selling_app.dto.request.AuthRequest;
 import com.example.food_selling_app.dto.response.AuthResponse;
 import com.example.food_selling_app.model.User;
-import com.example.food_selling_app.util.TokenManager;
+import com.example.food_selling_app.utils.JwtUtils;
+import com.example.food_selling_app.utils.TokenManager;
+
+import org.json.JSONArray;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                         AuthResponse authResponse = response.body();
                         TokenManager.saveToken(LoginActivity.this, authResponse.getAccessToken(), authResponse.getRefreshToken());
                         TokenManager.saveEmail(LoginActivity.this, email);
-                        getUserProfile(authResponse.getAccessToken());
+                        getUserRole(authResponse.getAccessToken());
                     } else {
                         // Kiểm tra mã lỗi và thông báo chi tiết từ server
                         try {
@@ -105,37 +108,51 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void getUserProfile(String accessToken) {
-        UserApi userApi = ApiClient.getClient(accessToken).create(UserApi.class);
+    private void getUserRole(String accessToken) {
+        JSONArray roles = JwtUtils.getRolesFromToken(accessToken);
 
+        fetchAndShowUserName(accessToken);
+
+        if (roles != null) {
+            for (int i = 0; i < roles.length(); i++) {
+                try {
+                    String role = roles.getString(i);
+
+                    if ("ROLE_ADMIN".equalsIgnoreCase(role)) {
+                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
+                        finish();
+                        return;
+                    } else if ("ROLE_USER".equalsIgnoreCase(role)) {
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        finish();
+                        return;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            Toast.makeText(LoginActivity.this, "Vai trò không hợp lệ", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(LoginActivity.this, "Không thể đọc vai trò từ token", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void fetchAndShowUserName(String accessToken) {
+        UserApi userApi = ApiClient.getClient(accessToken).create(UserApi.class);
         userApi.getUserProfile().enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    User user = response.body();
-                    Toast.makeText(LoginActivity.this, "Xin chào " + user.getName(), Toast.LENGTH_SHORT).show();
-
-                    // Kiểm tra role
-                    if ("user".equalsIgnoreCase(user.getRole())) {
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                    } else if ("admin".equalsIgnoreCase(user.getRole())) {
-                        startActivity(new Intent(LoginActivity.this, AdminHomeActivity.class));
-                    } else {
-                        Toast.makeText(LoginActivity.this, "Vai trò không hợp lệ: " + user.getRole(), Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-
-                    finish();
+                    String name = response.body().getName();
+                    Toast.makeText(LoginActivity.this, "Xin chào " + name, Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.e("USER_ME_FAIL", "Code: " + response.code());
-                    Toast.makeText(LoginActivity.this, "Không lấy được thông tin người dùng", Toast.LENGTH_SHORT).show();
+                    Log.e("USER_NAME_FAIL", "Không lấy được tên người dùng");
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e("PROFILE_FAIL", t.getMessage(), t);
-                Toast.makeText(LoginActivity.this, "Lỗi khi lấy thông tin hồ sơ", Toast.LENGTH_SHORT).show();
+                Log.e("USER_NAME_ERROR", t.getMessage(), t);
             }
         });
     }
