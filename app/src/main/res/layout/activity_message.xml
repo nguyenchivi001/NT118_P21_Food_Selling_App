@@ -3,7 +3,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:paddingBottom="15dp">
 
     <!-- Toolbar Space -->
     <Space
@@ -24,18 +25,29 @@
         android:paddingBottom="12dp"
         android:gravity="center_vertical">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_back"
-            android:contentDescription="Back" />
-
+        <!-- Giãn cách bên trái -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
+        <!-- Tiêu đề căn giữa -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TIN NHẮN"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+
+        <!-- Giãn cách bên phải -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <!-- Nút More -->
         <ImageView
             android:id="@+id/btnMore"
             android:layout_width="24dp"
@@ -43,6 +55,7 @@
             android:src="@drawable/ic_more"
             android:contentDescription="Options" />
     </LinearLayout>
+
 
     <!-- Chat messages list -->
     <androidx.recyclerview.widget.RecyclerView

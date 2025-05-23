@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
@@ -24,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     private MaterialButton btnLogout;
     private String userEmail;
@@ -33,9 +32,18 @@ public class ProfileActivity extends AppCompatActivity {
     private EditText edtName, edtEmail;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_profile;
+    }
+
+    @Override
+    protected int getSelectedNavItem() {
+        return R.id.nav_profile;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
 
         edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
@@ -65,19 +73,15 @@ public class ProfileActivity extends AppCompatActivity {
         View tvOrderHistory = findViewById(R.id.tvOrderHistory);
 
         tvPaymentDetails.setOnClickListener(v -> {
-            if (expandPaymentDetails.getVisibility() == View.GONE) {
-                expandPaymentDetails.setVisibility(View.VISIBLE);
-            } else {
-                expandPaymentDetails.setVisibility(View.GONE);
-            }
+            expandPaymentDetails.setVisibility(
+                    expandPaymentDetails.getVisibility() == View.GONE ? View.VISIBLE : View.GONE
+            );
         });
 
         tvOrderHistory.setOnClickListener(v -> {
-            if (expandOrderHistory.getVisibility() == View.GONE) {
-                expandOrderHistory.setVisibility(View.VISIBLE);
-            } else {
-                expandOrderHistory.setVisibility(View.GONE);
-            }
+            expandOrderHistory.setVisibility(
+                    expandOrderHistory.getVisibility() == View.GONE ? View.VISIBLE : View.GONE
+            );
         });
     }
 
