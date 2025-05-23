@@ -16,10 +16,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.PaymentDetailActivity"
+            android:name=".ui.BaseActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.ViewPaymentMethodsActivity"
+            android:name=".ui.PaymentDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.PaymentActivity"

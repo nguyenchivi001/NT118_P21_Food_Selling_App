@@ -1,16 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F2F2"
-    android:fitsSystemWindows="true">
+    android:background="#F2F2F2">
 
     <!-- Header -->
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
@@ -18,29 +17,16 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp">
 
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Yêu thích"
+            android:text="YÊU THÍCH"
             android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="18sp"
             android:gravity="center" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_user"
-            android:background="@drawable/bg_avatar_circle"
-            android:padding="8dp"
-            android:scaleType="centerCrop" />
     </LinearLayout>
 
     <!-- Empty View -->
@@ -60,10 +46,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerFavorites"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_below="@id/header"
+        android:layout_alignParentBottom="true"
         android:paddingHorizontal="16dp"
         android:paddingTop="8dp"
-        android:paddingBottom="12dp"
-        android:clipToPadding="false" />
+        android:paddingBottom="28dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
 </RelativeLayout>

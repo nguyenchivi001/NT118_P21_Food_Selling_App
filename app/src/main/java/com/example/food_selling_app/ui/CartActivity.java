@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,11 +16,9 @@ import com.example.food_selling_app.R;
 import com.example.food_selling_app.adapter.CartAdapter;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.CartApi;
-
 import com.example.food_selling_app.dto.request.CartItemRequest;
 import com.example.food_selling_app.dto.response.ApiResponse;
 import com.example.food_selling_app.model.CartItem;
-
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -33,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartActivity extends AppCompatActivity {
+public class CartActivity extends BaseActivity {
 
     private RecyclerView recyclerCart;
     private CartAdapter cartAdapter;
@@ -43,11 +40,19 @@ public class CartActivity extends AppCompatActivity {
     private CartApi cartApi;
     private String accessToken;
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_cart;
+    }
+
+    @Override
+    protected int getSelectedNavItem() {
+        return R.id.nav_cart;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
 
         recyclerCart = findViewById(R.id.recyclerCart);
         tvSubtotal = findViewById(R.id.tvSubtotal);
@@ -55,10 +60,7 @@ public class CartActivity extends AppCompatActivity {
         btnCheckout = findViewById(R.id.btnCheckout);
         tvEmptyCart = findViewById(R.id.tvEmptyCart);
 
-        ImageView btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> finish());
 
-        // Khởi tạo API service và lấy access token
         accessToken = getSharedPreferences("prefs", MODE_PRIVATE).getString("access_token", "");
         cartApi = ApiClient.getClient(accessToken).create(CartApi.class);
 
@@ -72,10 +74,8 @@ public class CartActivity extends AppCompatActivity {
         recyclerCart.setLayoutManager(new LinearLayoutManager(this));
         recyclerCart.setAdapter(cartAdapter);
 
-        // Load dữ liệu giỏ hàng từ backend
         loadCartItems();
 
-        // Xử lý vuốt để xóa
         ItemTouchHelper.SimpleCallback itemTouchHelper = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
@@ -101,13 +101,10 @@ public class CartActivity extends AppCompatActivity {
         };
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerCart);
 
-        // Xử lý nút checkout (chưa hiện thực)
-        btnCheckout = findViewById(R.id.btnCheckout);
         btnCheckout.setOnClickListener(v -> {
             Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
             startActivity(intent);
         });
-
     }
 
     private void loadCartItems() {
@@ -172,14 +169,14 @@ public class CartActivity extends AppCompatActivity {
                     updateEmptyState();
                 } else {
                     Toast.makeText(CartActivity.this, "Failed to remove item", Toast.LENGTH_SHORT).show();
-                    cartAdapter.notifyItemChanged(position); // Khôi phục giao diện nếu xóa thất bại
+                    cartAdapter.notifyItemChanged(position);
                 }
             }
 
             @Override
             public void onFailure(Call<ApiResponse<Void>> call, Throwable t) {
                 Toast.makeText(CartActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                cartAdapter.notifyItemChanged(position); // Khôi phục giao diện nếu xóa thất bại
+                cartAdapter.notifyItemChanged(position);
             }
         });
     }
