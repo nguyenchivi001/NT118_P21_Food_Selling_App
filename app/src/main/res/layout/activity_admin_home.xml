@@ -1,73 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/admin_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="80dp"
     android:background="#FFFFFF">
 
-    <!-- Nội dung chính -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="80dp"
-        android:layout_gravity="top"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="60dp">
-
-        <!-- Tiêu đề -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp">
-
-            <TextView
-                android:id="@+id/tvAdminTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Admin Dashboard"
-                android:textStyle="bold"
-                android:textColor="#EF2A39"
-                android:textSize="26sp" />
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Quản lý dữ liệu hệ thống"
-            android:textSize="14sp"
-            android:textColor="#777777"
-            android:layout_marginTop="4dp" />
-
-        <!-- Grid các tùy chọn -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAdminOptions"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="16dp"
-            android:clipToPadding="false" />
-    </LinearLayout>
-
-    <!-- Bottom Navigation -->
-    <FrameLayout
+    <!-- Tiêu đề -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_bottom_nav">
+        android:paddingBottom="8dp">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/admin_bottom_navigation"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvAdminTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:menu="@menu/admin_bottom_nav_menu"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
-            android:background="@android:color/transparent"
-            app:labelVisibilityMode="labeled" />
-    </FrameLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            android:text="Admin Dashboard"
+            android:textStyle="bold"
+            android:textColor="#EF2A39"
+            android:textSize="26sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quản lý dữ liệu hệ thống"
+        android:textSize="14sp"
+        android:textColor="#777777"
+        android:layout_marginTop="4dp" />
+
+    <!-- Grid các tùy chọn -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAdminOptions"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp"
+        android:clipToPadding="false" />
+</LinearLayout>

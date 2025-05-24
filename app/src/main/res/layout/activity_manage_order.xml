@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/admin_manage_order_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ManageOrderActivity">
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Tiêu đề -->
+    <TextView
+        android:id="@+id/tvManageOrdersTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quản lý đơn hàng"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#EF2A39"
+        android:paddingBottom="4dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Xem, xử lý và theo dõi đơn hàng khách hàng"
+        android:textSize="14sp"
+        android:textColor="#666666" />
+
+    <!-- Tìm kiếm đơn hàng -->
+    <EditText
+        android:id="@+id/edtSearchOrder"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:hint="Tìm đơn hàng theo mã hoặc khách hàng"
+        android:background="@drawable/bg_edittext"
+        android:paddingHorizontal="12dp"
+        android:textSize="14sp"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="8dp" />
+
+    <!-- Danh sách đơn hàng -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOrders"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never" />
+
+    <!-- Trạng thái trống -->
+    <TextView
+        android:id="@+id/tvEmptyOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Không có đơn hàng nào"
+        android:textSize="15sp"
+        android:textColor="#999999"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:layout_marginTop="32dp" />
+
+</LinearLayout>

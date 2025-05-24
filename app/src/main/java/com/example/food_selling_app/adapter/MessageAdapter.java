@@ -44,10 +44,12 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message message = messageList.get(position);
+        String text = message.getContent(); // <-- Sử dụng getContent()
+
         if (holder instanceof RightViewHolder) {
-            ((RightViewHolder) holder).tvMessage.setText(message.getText());
+            ((RightViewHolder) holder).tvMessage.setText(text);
         } else if (holder instanceof LeftViewHolder) {
-            ((LeftViewHolder) holder).tvMessage.setText(message.getText());
+            ((LeftViewHolder) holder).tvMessage.setText(text);
         }
     }
 

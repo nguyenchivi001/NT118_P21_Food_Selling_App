@@ -1,19 +1,28 @@
 package com.example.food_selling_app.model;
 
-public class Message {
-    private String text;
-    private boolean sentByUser;
+import com.google.gson.annotations.SerializedName;
 
-    public Message(String text, boolean sentByUser) {
-        this.text = text;
-        this.sentByUser = sentByUser;
+public class Message {
+    @SerializedName("role")
+    private String role;
+    @SerializedName("content")
+    private String content;
+
+
+    public Message(String role, String content) {
+        this.role = role;
+        this.content = content;
     }
 
-    public String getText() {
-        return text;
+    public String getRole() {
+        return role;
+    }
+
+    public String getContent() {
+        return content;
     }
 
     public boolean isSentByUser() {
-        return sentByUser;
+        return "user".equalsIgnoreCase(role);
     }
 }
