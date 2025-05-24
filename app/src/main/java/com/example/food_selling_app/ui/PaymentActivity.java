@@ -18,8 +18,8 @@ import com.example.food_selling_app.R;
 import com.example.food_selling_app.api.ApiClient;
 import com.example.food_selling_app.api.CartApi;
 import com.example.food_selling_app.api.OrderApi;
-import com.example.food_selling_app.dto.request.OrderRequest;
-import com.example.food_selling_app.dto.request.OrderItemRequest;
+import com.example.food_selling_app.model.Order;
+import com.example.food_selling_app.model.OrderItem;
 import com.example.food_selling_app.dto.response.ApiResponse;
 import com.example.food_selling_app.model.CartItem;
 import com.google.android.material.button.MaterialButton;
@@ -42,7 +42,7 @@ public class PaymentActivity extends AppCompatActivity {
     private EditText edtShippingAddress;
     private TextView tvOrderTotal, tvShippingFee, tvTotal, tvFooterTotal;
     private MaterialButton btnPayNow;
-    private String selectedPaymentMethod = "online"; // Mặc định là online
+    private String selectedPaymentMethod = "online";
     private double totalPrice;
     private List<CartItem> cartItems;
     private OrderApi orderApi;
@@ -153,25 +153,25 @@ public class PaymentActivity extends AppCompatActivity {
         }
 
         // Tạo OrderRequest
-        OrderRequest orderRequest = new OrderRequest();
-        orderRequest.setUserId(userId);
-        orderRequest.setDeliveryAddress(shippingAddress);
-        orderRequest.setPaymentMethod(selectedPaymentMethod);
+        Order order = new Order();
+        order.setUserId(userId);
+        order.setDeliveryAddress(shippingAddress);
+        order.setPaymentMethod(selectedPaymentMethod);
 
-        List<OrderItemRequest> orderItems = new ArrayList<>();
+        List<OrderItem> orderItems = new ArrayList<>();
         for (CartItem item : cartItems) {
-            OrderItemRequest orderItem = new OrderItemRequest();
+            OrderItem orderItem = new OrderItem();
             orderItem.setFoodId(item.getFoodId());
             orderItem.setQuantity(item.getQuantity());
             orderItems.add(orderItem);
         }
-        orderRequest.setOrderItems(orderItems);
+        order.setOrderItems(orderItems);
 
         // Gọi API tạo đơn hàng
-        Call<ApiResponse<OrderRequest>> call = orderApi.createOrder(orderRequest);
-        call.enqueue(new Callback<ApiResponse<OrderRequest>>() {
+        Call<ApiResponse<Order>> call = orderApi.createOrder(order);
+        call.enqueue(new Callback<ApiResponse<Order>>() {
             @Override
-            public void onResponse(Call<ApiResponse<OrderRequest>> call, Response<ApiResponse<OrderRequest>> response) {
+            public void onResponse(Call<ApiResponse<Order>> call, Response<ApiResponse<Order>> response) {
                 Log.d(TAG, "createOrder response: code=" + response.code() + ", body=" + (response.body() != null ? response.body().isSuccess() : "null"));
                 if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                     // Xóa giỏ hàng
@@ -184,7 +184,7 @@ public class PaymentActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<OrderRequest>> call, Throwable t) {
+            public void onFailure(Call<ApiResponse<Order>> call, Throwable t) {
                 Log.e(TAG, "createOrder failure: " + t.getMessage());
                 Toast.makeText(PaymentActivity.this, "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }

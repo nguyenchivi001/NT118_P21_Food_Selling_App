@@ -1,6 +1,6 @@
-package com.example.food_selling_app.dto.request;
+package com.example.food_selling_app.model;
 
-public class OrderItemRequest {
+public class OrderItem {
     private int foodId;
     private Integer quantity;
 

@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText edtUsername, edtPassword;
     Button btnLogin;
-    TextView tvRegisterNow, tvForgotPassword;
+    TextView tvRegisterNow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvRegisterNow = findViewById(R.id.tvRegister);
-        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
         btnLogin.setOnClickListener(v -> {
             String email = edtUsername.getText().toString().trim();
@@ -101,10 +100,6 @@ public class LoginActivity extends AppCompatActivity {
 
         tvRegisterNow.setOnClickListener(v -> {
             startActivity(new Intent(this, SignupActivity.class));
-        });
-
-        tvForgotPassword.setOnClickListener(v -> {
-            Toast.makeText(this, "Đã gửi liên kết đặt lại mật khẩu.", Toast.LENGTH_SHORT).show();
         });
     }
 
