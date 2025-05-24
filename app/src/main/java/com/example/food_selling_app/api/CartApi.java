@@ -26,4 +26,7 @@ public interface CartApi {
 
     @DELETE("api/cart-items/{foodId}")
     Call<ApiResponse<Void>> removeFromCart(@Path("foodId") Integer foodId);
+
+    @DELETE("api/cart-items")
+    Call<ApiResponse<Void>> clearCart();
 }

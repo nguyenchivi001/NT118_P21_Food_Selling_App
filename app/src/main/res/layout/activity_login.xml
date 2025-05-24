@@ -90,17 +90,6 @@
             android:textColorHint="#AAAAAA"
             android:inputType="textPassword" />
 
-        <!-- Forgot password -->
-        <TextView
-            android:id="@+id/tvForgotPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quên mật khẩu?"
-            android:textColor="#FF3D00"
-            android:gravity="end"
-            android:textSize="16sp"
-            android:layout_marginBottom="24dp" />
-
         <!-- Login Button -->
         <Button
             android:id="@+id/btnLogin"
@@ -111,7 +100,8 @@
             android:textColor="#FFFFFF"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginBottom="20dp" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"/>
 
         <!-- Register -->
         <TextView

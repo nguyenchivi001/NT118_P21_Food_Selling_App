@@ -60,7 +60,6 @@ public class CartActivity extends BaseActivity {
         btnCheckout = findViewById(R.id.btnCheckout);
         tvEmptyCart = findViewById(R.id.tvEmptyCart);
 
-
         accessToken = getSharedPreferences("prefs", MODE_PRIVATE).getString("access_token", "");
         cartApi = ApiClient.getClient(accessToken).create(CartApi.class);
 
@@ -102,7 +101,17 @@ public class CartActivity extends BaseActivity {
         new ItemTouchHelper(itemTouchHelper).attachToRecyclerView(recyclerCart);
 
         btnCheckout.setOnClickListener(v -> {
+            if (cartList.isEmpty()) {
+                Toast.makeText(CartActivity.this, "Giỏ hàng trống!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
+            double totalPrice = 0.0;
+            for (CartItem item : cartList) {
+                totalPrice += item.getPrice() * item.getQuantity();
+            }
+            intent.putExtra("totalPrice", totalPrice);
+            intent.putParcelableArrayListExtra("cartItems", new ArrayList<>(cartList));
             startActivity(intent);
         });
     }
@@ -185,9 +194,11 @@ public class CartActivity extends BaseActivity {
         if (cartList.isEmpty()) {
             tvEmptyCart.setVisibility(TextView.VISIBLE);
             recyclerCart.setVisibility(RecyclerView.GONE);
+            btnCheckout.setEnabled(false);
         } else {
             tvEmptyCart.setVisibility(TextView.GONE);
             recyclerCart.setVisibility(RecyclerView.VISIBLE);
+            btnCheckout.setEnabled(true);
         }
     }
 
