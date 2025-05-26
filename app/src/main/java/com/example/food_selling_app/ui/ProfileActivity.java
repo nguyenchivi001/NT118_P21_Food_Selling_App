@@ -85,6 +85,8 @@ public class ProfileActivity extends BaseActivity {
             return;
         }
 
+        fetchUserProfile();
+
         orderList = new ArrayList<>();
         orderHistoryAdapter = new OrderHistoryAdapter(this, orderList, this::cancelOrder);
         rvOrderHistory.setLayoutManager(new LinearLayoutManager(this));

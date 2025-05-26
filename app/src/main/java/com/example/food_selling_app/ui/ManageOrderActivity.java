@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.food_selling_app.R;
-import com.example.food_selling_app.adapter.OrderAdapter;
+import com.example.food_selling_app.adapter.AdminOrderAdapter;
 import com.example.food_selling_app.model.Order;
 import com.example.food_selling_app.model.OrderItem;
 
@@ -17,7 +17,7 @@ public class ManageOrderActivity extends BaseAdminActivity {
 
     private RecyclerView rvOrders;
     private List<Order> orderList;
-    private OrderAdapter orderAdapter;
+    private AdminOrderAdapter orderAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -86,7 +86,7 @@ public class ManageOrderActivity extends BaseAdminActivity {
         orderList.add(order2);
         orderList.add(order3);
 
-        orderAdapter = new OrderAdapter(this, orderList);
+        orderAdapter = new AdminOrderAdapter(this, orderList);
         rvOrders.setAdapter(orderAdapter);
     }
 

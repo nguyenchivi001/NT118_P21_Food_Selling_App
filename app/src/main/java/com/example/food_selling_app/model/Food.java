@@ -11,6 +11,9 @@ public class Food {
     private boolean available;
 
     // Constructor
+
+    public Food() {}
+
     public Food(int id, String name, String description, Double price, String imageFilename,
                 int categoryId, int stockQuantity, boolean available) {
         this.id = id;
