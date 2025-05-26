@@ -6,13 +6,11 @@
     android:background="#FFFFFF"
     android:paddingBottom="15dp">
 
-    <!-- Toolbar Space -->
     <Space
         android:id="@+id/toolbarSpace"
         android:layout_width="match_parent"
         android:layout_height="56dp" />
 
-    <!-- Top bar with back and more icons -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -25,13 +23,11 @@
         android:paddingBottom="12dp"
         android:gravity="center_vertical">
 
-        <!-- Giãn cách bên trái -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <!-- Tiêu đề căn giữa -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
@@ -41,36 +37,32 @@
             android:textStyle="bold"
             android:textSize="18sp" />
 
-        <!-- Giãn cách bên phải -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1" />
 
-        <!-- Nút More -->
         <ImageView
             android:id="@+id/btnMore"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_more"
-            android:contentDescription="Options" />
+            android:contentDescription="More" />
     </LinearLayout>
 
-
-    <!-- Chat messages list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerChat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_above="@id/chatInputContainer"
         android:layout_below="@id/topBar"
-        android:paddingHorizontal="16dp"
+        android:layout_above="@id/chatInputContainer"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:clipToPadding="false"
         android:overScrollMode="never" />
 
-    <!-- Chat input section -->
     <LinearLayout
         android:id="@+id/chatInputContainer"
         android:layout_width="match_parent"
@@ -78,21 +70,34 @@
         android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="#F9F9F9"
-        android:paddingHorizontal="16dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/btnMic"
+            android:layout_width="50dp"
+            android:layout_height="60dp"
+            android:src="@android:drawable/ic_btn_speak_now"
+            android:contentDescription="Mic"
+            android:layout_marginEnd="8dp" />
 
         <EditText
             android:id="@+id/edtMessage"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:hint="Type here..."
+            android:hint="Nhập tin nhắn..."
             android:background="@drawable/bg_edittext"
-            android:paddingHorizontal="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:textSize="14sp"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:maxLines="5"
+            android:minHeight="48dp"
+            android:gravity="center_vertical|start" />
 
         <ImageButton
             android:id="@+id/btnSend"
@@ -101,6 +106,6 @@
             android:src="@drawable/ic_send"
             android:background="@drawable/bg_send_button"
             android:layout_marginStart="10dp"
-            android:contentDescription="Send" />
+            android:contentDescription="Gửi" />
     </LinearLayout>
 </RelativeLayout>
