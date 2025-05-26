@@ -1,6 +1,7 @@
 package com.example.food_selling_app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -98,6 +99,13 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<OrderHistoryAdapte
         holder.tvPaymentMethod.setText("Thanh toán: " + (order.isPaid() ? "Đã thanh toán" : "Tiền mặt"));
 
         holder.btnCancelOrder.setOnClickListener(v -> cancelListener.onCancelOrder(order.getId()));
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, com.example.food_selling_app.ui.OrderDetailActivity.class);
+            intent.putExtra("order", order);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override

@@ -30,9 +30,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đặt món yêu thích của bạn!"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textColor="#777777"
-        android:layout_marginTop="2dp" />
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center" />
 
     <!-- Search -->
     <LinearLayout

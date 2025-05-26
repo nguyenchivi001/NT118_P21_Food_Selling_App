@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="12dp"
+    android:padding="16dp"
+    android:background="@drawable/bg_order_item"
+    android:elevation="2dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvOrderCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Đơn #12345"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#1A1A1A" />
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đang giao"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="5dp"
+            android:background="@drawable/bg_status_processing"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCustomerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Khách: Nguyễn Văn A"
+        android:textSize="14sp"
+        android:textColor="#333333" />
+
+    <TextView
+        android:id="@+id/tvOrderDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Ngày: 20/05/2025"
+        android:textSize="13sp"
+        android:textColor="#777777" />
+
+    <TextView
+        android:id="@+id/tvDeliveryAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Địa chỉ: 123 Lê Lợi, Q.1, TP.HCM"
+        android:textSize="13sp"
+        android:textColor="#555555" />
+
+    <TextView
+        android:id="@+id/tvFoodList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="• Burger bò x2\n• Gà rán x1\n• Pepsi x3"
+        android:textSize="14sp"
+        android:textColor="#444444" />
+
+    <TextView
+        android:id="@+id/tvTotalAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Tổng tiền: 250.000đ"
+        android:textSize="15sp"
+        android:textColor="#EF2A39"
+        android:textStyle="bold" />
+</LinearLayout>
