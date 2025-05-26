@@ -15,12 +15,12 @@ import com.example.food_selling_app.model.OrderItem;
 
 import java.util.List;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
+public class AdminOrderAdapter extends RecyclerView.Adapter<AdminOrderAdapter.OrderViewHolder> {
 
     private Context context;
     private List<Order> orderList;
 
-    public OrderAdapter(Context context, List<Order> orderList) {
+    public AdminOrderAdapter(Context context, List<Order> orderList) {
         this.context = context;
         this.orderList = orderList;
     }
