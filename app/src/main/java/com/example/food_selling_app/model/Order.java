@@ -1,9 +1,9 @@
 package com.example.food_selling_app.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order  implements Serializable {
 
     private int id;
     private int userId;

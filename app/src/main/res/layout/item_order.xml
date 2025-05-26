@@ -11,7 +11,6 @@
     android:clickable="true"
     android:focusable="true">
 
-    <!-- Dòng 1: Mã đơn và Trạng thái -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +40,6 @@
             android:layout_marginStart="8dp" />
     </LinearLayout>
 
-    <!-- Dòng 2: Tên khách hàng -->
     <TextView
         android:id="@+id/tvCustomerName"
         android:layout_width="match_parent"
@@ -51,7 +49,6 @@
         android:textSize="14sp"
         android:textColor="#333333" />
 
-    <!-- Dòng 3: Ngày đặt -->
     <TextView
         android:id="@+id/tvOrderDate"
         android:layout_width="match_parent"
@@ -61,7 +58,15 @@
         android:textSize="13sp"
         android:textColor="#777777" />
 
-    <!-- Dòng 4: Danh sách món ăn -->
+    <TextView
+        android:id="@+id/tvDeliveryAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Địa chỉ: 123 Lê Lợi, Q.1, TP.HCM"
+        android:textSize="13sp"
+        android:textColor="#555555" />
+
     <TextView
         android:id="@+id/tvFoodList"
         android:layout_width="match_parent"
@@ -71,7 +76,6 @@
         android:textSize="14sp"
         android:textColor="#444444" />
 
-    <!-- Dòng 5: Tổng tiền -->
     <TextView
         android:id="@+id/tvTotalAmount"
         android:layout_width="match_parent"
