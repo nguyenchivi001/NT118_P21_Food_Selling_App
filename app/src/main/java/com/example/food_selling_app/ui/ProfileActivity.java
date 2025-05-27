@@ -39,7 +39,7 @@ public class ProfileActivity extends BaseActivity {
     private static final String TAG = "ProfileActivity";
 
     private EditText edtName, edtEmail;
-    private MaterialButton btnLogout, btnEditProfile, btnOrderHistory;
+    private MaterialButton btnLogout, btnOrderHistory;
     private RecyclerView rvOrderHistory;
     private OrderHistoryAdapter orderHistoryAdapter;
     private List<Order> orderList;
@@ -67,7 +67,6 @@ public class ProfileActivity extends BaseActivity {
         edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
         btnLogout = findViewById(R.id.btnLogout);
-        btnEditProfile = findViewById(R.id.btnEditProfile);
         btnOrderHistory = findViewById(R.id.btnOrderHistory);
 
         rvOrderHistory = findViewById(R.id.rvOrderHistory);
@@ -108,10 +107,6 @@ public class ProfileActivity extends BaseActivity {
         });
 
         btnLogout.setOnClickListener(v -> showLogoutConfirmationDialog());
-
-        btnEditProfile.setOnClickListener(v -> {
-            Toast.makeText(this, "Chức năng chỉnh sửa hồ sơ đang phát triển", Toast.LENGTH_SHORT).show();
-        });
     }
 
     private void fetchUserProfile() {
