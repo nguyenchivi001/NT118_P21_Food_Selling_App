@@ -1,8 +1,11 @@
 package com.example.food_selling_app.adapter;
 
+import android.content.Context;
+import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,6 +15,7 @@ import com.example.food_selling_app.R;
 import com.example.food_selling_app.model.Message;
 
 import java.util.List;
+import java.util.Locale;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -44,12 +48,23 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         Message message = messageList.get(position);
-        String text = message.getContent(); // <-- Sử dụng getContent()
+        String text = message.getContent();
 
         if (holder instanceof RightViewHolder) {
             ((RightViewHolder) holder).tvMessage.setText(text);
         } else if (holder instanceof LeftViewHolder) {
-            ((LeftViewHolder) holder).tvMessage.setText(text);
+            LeftViewHolder leftHolder = (LeftViewHolder) holder;
+            leftHolder.tvMessage.setText(text);
+
+            // Chỉ hiện nút loa nếu là tin nhắn của assistant
+            if ("assistant".equalsIgnoreCase(message.getRole())) {
+                leftHolder.btnSpeak.setVisibility(View.VISIBLE);
+                leftHolder.btnSpeak.setOnClickListener(v -> {
+                    leftHolder.tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
+                });
+            } else {
+                leftHolder.btnSpeak.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -69,10 +84,20 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     static class LeftViewHolder extends RecyclerView.ViewHolder {
         TextView tvMessage;
+        ImageView btnSpeak;
+        TextToSpeech tts;
 
         public LeftViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMessage = itemView.findViewById(R.id.tvMessage);
+            btnSpeak = itemView.findViewById(R.id.btnSpeak);
+
+            // Khởi tạo TTS cho từng holder
+            tts = new TextToSpeech(itemView.getContext(), status -> {
+                if (status == TextToSpeech.SUCCESS) {
+                    tts.setLanguage(new Locale("vi", "VN"));
+                }
+            });
         }
     }
 }

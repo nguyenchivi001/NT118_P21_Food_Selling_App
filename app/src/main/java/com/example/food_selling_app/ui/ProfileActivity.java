@@ -217,6 +217,7 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
+                    com.example.food_selling_app.model.ChatMemory.getInstance().clear();
                     TokenManager.clearTokensAndEmail(ProfileActivity.this);
                     redirectToLogin();
                     Toast.makeText(ProfileActivity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();

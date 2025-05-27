@@ -2,7 +2,9 @@ package com.example.food_selling_app.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message  implements Serializable {
     @SerializedName("role")
     private String role;
     @SerializedName("content")
